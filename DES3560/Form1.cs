@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
+using DES3560.Curriculum.RGC;
 
 namespace DES3560
 {
@@ -17,6 +18,7 @@ namespace DES3560
         public string filePath;
         public string pdfText;
         public Student studentInfo;
+        public CommonRGC rgc;
 
         #region Functions
         public Form1()
@@ -139,7 +141,7 @@ namespace DES3560
                 initStudentInfo();
                 if (checkMajor())
                 {
-
+                    
                 }
                 else
                     MessageBox.Show("컴퓨터공학을 전공하고 있지 않은 학생입니다.", "오류", MessageBoxButtons.OK);
