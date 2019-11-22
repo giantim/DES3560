@@ -12,5 +12,7 @@ namespace DES3560
         public string curriculumYear;
         public string studentId;
         public string name;
+        public string major;
+        public string submajor;
     }
 }

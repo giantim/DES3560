@@ -36,7 +36,14 @@ namespace DES3560
                         text.Append(PdfTextExtractor.GetTextFromPage(reader, i));
                     }
                     pdfText = text.ToString();
-                    return true;
+                    if (checkClassification())
+                        return true;
+                    else
+                    {
+                        MessageBox.Show("취득교과목 영역별 분류표를 선택해 주십시오.", "오류", MessageBoxButtons.OK);
+                        txtFileName.Clear();
+                        return false;
+                    }
                 }
             }
             catch (Exception e)
@@ -45,24 +52,69 @@ namespace DES3560
                 return false;
             }
         }
-        private void analysis()
+        private void initStudentInfo()
         {
-            if (checkClassification())
+            string curriculumYear = pdfText.Substring(pdfText.IndexOf("교육과정 적용년도: ") + 11, 4);
+            string studentId = pdfText.Substring(pdfText.IndexOf("학번: ") + 4, 10);
+            string name = extractName();
+            string major = extractMajor();
+            string submajor = extractSubmajor();
+            studentInfo = new Student
             {
-                string curriculumYear = pdfText.Substring(pdfText.IndexOf("교육과정 적용년도: ") + 11, 4);
-                string studentId = pdfText.Substring(pdfText.IndexOf("학번: ") + 4, 10);
-                string name = pdfText.Substring(pdfText.IndexOf("성명: ") + 4, 3);
-                //string major = pdfText.Substring(pdfText.IndexOf("학과 : ") + 5, )
-            }
-            else
+                curriculumYear = curriculumYear,
+                studentId = studentId,
+                name = name,
+                major = major,
+                submajor = submajor,
+            };
+        }
+        private string extractName()
+        {
+            string nameString = pdfText.Substring(pdfText.IndexOf("성명: ") + 4);
+            int index = 0;
+            foreach (char c in nameString)
             {
-                MessageBox.Show("취득교과목 영역별 분류표를 선택해 주십시오.", "오류", MessageBoxButtons.OK);
-                txtFileName.Clear();
+                if (!c.Equals(' '))
+                    index = index + 1;
+                else
+                    break;
             }
+            return nameString.Substring(0, index);
+        }
+        private string extractMajor()
+        {
+            string majorString = pdfText.Substring(pdfText.IndexOf("학과 : ") + 5);
+            int index = 0;
+            foreach(char c in majorString)
+            {
+                if (!c.Equals(' '))
+                    index = index + 1;
+                else break;
+            }
+            return majorString.Substring(0, index);
+        }
+        private string extractSubmajor()
+        {
+            string submajorString = pdfText.Substring(pdfText.IndexOf("복수1: ") + 5);
+            int index = 0;
+            foreach(char c in submajorString)
+            {
+                if (!(c >= 33 && c <= 126))
+                    index = index + 1;
+                else
+                    break;
+            }
+            return submajorString.Substring(0, index);
         }
         private bool checkClassification()
         {
             if (pdfText.Substring(0, 13).Equals("취득교과목 영역별 분류표"))
+                return true;
+            return false;
+        }
+        private bool checkMajor()
+        {
+            if (studentInfo.major.Equals("컴퓨터공학전공") || studentInfo.submajor.Equals("컴퓨터공학전공"))
                 return true;
             return false;
         }
@@ -83,7 +135,15 @@ namespace DES3560
         private void btnExecution_Click(object sender, EventArgs e)
         {
             if (extractTextFromPdf())
-                analysis();
+            {
+                initStudentInfo();
+                if (checkMajor())
+                {
+
+                }
+                else
+                    MessageBox.Show("컴퓨터공학을 전공하고 있지 않은 학생입니다.", "오류", MessageBoxButtons.OK);
+            }
         }
         #endregion
     }

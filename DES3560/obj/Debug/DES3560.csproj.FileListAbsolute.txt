@@ -10,3 +10,15 @@ C:\Users\Administrator\source\repos\DES3560\DES3560\obj\Debug\DES3560.csproj.Cop
 C:\Users\Administrator\source\repos\DES3560\DES3560\obj\Debug\DES3560.exe
 C:\Users\Administrator\source\repos\DES3560\DES3560\obj\Debug\DES3560.pdb
 C:\Users\Administrator\source\repos\DES3560\DES3560\obj\Debug\DES3560.Form1.resources
+C:\Users\giant\source\repos\DES3560\DES3560\bin\Debug\DES3560.exe.config
+C:\Users\giant\source\repos\DES3560\DES3560\bin\Debug\DES3560.exe
+C:\Users\giant\source\repos\DES3560\DES3560\bin\Debug\DES3560.pdb
+C:\Users\giant\source\repos\DES3560\DES3560\bin\Debug\itextsharp.dll
+C:\Users\giant\source\repos\DES3560\DES3560\bin\Debug\itextsharp.xml
+C:\Users\giant\source\repos\DES3560\DES3560\obj\Debug\DES3560.csprojAssemblyReference.cache
+C:\Users\giant\source\repos\DES3560\DES3560\obj\Debug\DES3560.Form1.resources
+C:\Users\giant\source\repos\DES3560\DES3560\obj\Debug\DES3560.Properties.Resources.resources
+C:\Users\giant\source\repos\DES3560\DES3560\obj\Debug\DES3560.csproj.GenerateResource.cache
+C:\Users\giant\source\repos\DES3560\DES3560\obj\Debug\DES3560.csproj.CopyComplete
+C:\Users\giant\source\repos\DES3560\DES3560\obj\Debug\DES3560.exe
+C:\Users\giant\source\repos\DES3560\DES3560\obj\Debug\DES3560.pdb
