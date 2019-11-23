@@ -7,7 +7,6 @@ namespace DES3560.Curriculum.RGC
     {
         public string pdfText;
         public List<string> subjectList;
-        public List<string> leaderShipList;
         public List<string> unacquiredRGC;
         public string RGCGrade;
 
@@ -15,6 +14,9 @@ namespace DES3560.Curriculum.RGC
         public CommonRGC(string text)
         {
             pdfText = text;
+
+            subjectList = new List<string>();
+            unacquiredRGC = new List<string>();
 
             subjectList.Add(subjectRGC.RGC0017);
             subjectList.Add(subjectRGC.RGC0018);
@@ -24,9 +26,7 @@ namespace DES3560.Curriculum.RGC
             subjectList.Add(subjectRGC.RGC1033);
             subjectList.Add(subjectRGC.RGC1034);
 
-            leaderShipList.Add(subjectRGC.RGC1050);
-            leaderShipList.Add(subjectRGC.RGC1051);
-            leaderShipList.Add(subjectRGC.RGC1052);
+            checkRGC();
         }
         public void checkRGC()
         {
@@ -35,12 +35,11 @@ namespace DES3560.Curriculum.RGC
                 if (!pdfText.Contains(s))
                     unacquiredRGC.Add(s);
             }
-            if (!(pdfText.Contains(leaderShipList[0]) || pdfText.Contains(leaderShipList[1])
-                || pdfText.Contains(leaderShipList[2])))
+            if (!(pdfText.Contains(subjectRGC.RGC1050) || pdfText.Contains(subjectRGC.RGC1051)
+                || pdfText.Contains(subjectRGC.RGC1052)))
                 unacquiredRGC.Add("리더십");
             RGCGrade = pdfText.Substring(pdfText.IndexOf("공통교양: 총") + 7, 2);
         }
-
         #endregion
     }
 }

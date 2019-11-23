@@ -8,8 +8,8 @@ namespace DES3560
 {
     public class Student
     {
-
         public string curriculumYear;
+        public string studentClass;
         public string studentId;
         public string name;
         public string major;
