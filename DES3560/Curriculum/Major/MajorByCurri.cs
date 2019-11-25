@@ -1,33 +1,45 @@
-﻿using System;
+﻿using DES3560.Subject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DES3560.Subject;
 
-namespace DES3560.Curriculum._2014
+namespace DES3560.Curriculum.Major
 {
-    public class Major2014
+    public class MajorByCurri
     {
         public string pdfText;
-        public string submajor;
+        public int curriYear;
+        public bool submajor;
         public List<string> subjectList;
         public List<string> unacquiredMajor;
         public int allGrade;
         public int designGrade;
         public int specialGrade;
 
-        public Major2014(string text, string major)
+        public MajorByCurri(string text, int year, bool isSubmajor)
         {
             pdfText = text;
-            submajor = major;
-            allGrade = 0;
-            designGrade = 0;
-            specialGrade = 0;
+            if (year < 2017)
+                curriYear = 2014;
+            else
+                curriYear = 2017;
+            submajor = isSubmajor;
 
             subjectList = new List<string>();
             unacquiredMajor = new List<string>();
 
+            addSubject(curriYear);
+
+            allGrade = 0;
+            designGrade = 0;
+            specialGrade = 0;
+
+            checkMajor();
+        }
+        private void addSubject(int year)
+        {
             subjectList.Add(subjectMajor.CSE2016);
             subjectList.Add(subjectMajor.CSE4074);
             subjectList.Add(subjectMajor.CSE4066);
@@ -35,8 +47,11 @@ namespace DES3560.Curriculum._2014
             subjectList.Add(subjectMajor.CSE2017);
             subjectList.Add(subjectMajor.CSE2018);
             subjectList.Add(subjectMajor.CSE2013);
-
-            checkMajor();
+            if (year == 2017)
+            {
+                subjectList.Add(subjectMajor.CSE2025);
+                subjectList.Add(subjectMajor.CSE2026);
+            }
         }
         private void checkMajor()
         {
@@ -46,7 +61,7 @@ namespace DES3560.Curriculum._2014
         }
         private void extractGrade()
         {
-            if (submajor == "")
+            if (submajor == false)
             {
                 allGrade = Int32.Parse(pdfText.Substring(pdfText.IndexOf("제1전공: 총") + 7, 2));
                 specialGrade = Int32.Parse(pdfText.Substring(pdfText.IndexOf("제1전공: 총") + 24, 2));
@@ -70,7 +85,14 @@ namespace DES3560.Curriculum._2014
             foreach (string s in subjectList)
             {
                 if (!pdfText.Contains(s))
-                    unacquiredMajor.Add(s);
+                {
+                    if (s == "CSE4066")
+                        unacquiredMajor.Add("컴퓨터공학종합설계1");
+                    else if (s == "CSE4067")
+                        unacquiredMajor.Add("컴퓨터공학종합설계2");
+                    else
+                        unacquiredMajor.Add(s);
+                }
             }
             int count = 0;
             while (pdfText.Contains("개별연구"))

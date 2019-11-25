@@ -10,14 +10,14 @@ namespace DES3560.Curriculum.MSC
     public class CommonMSC
     {
         public string pdfText;
-        public string curriculumYear;
+        public int curriculumYear;
         public List<KeyValuePair<string, int>> subjectMath;
         public List<KeyValuePair<string, int>> subjectScience;
         public List<string> unacquiredList;
         public int scienceGrade;
         public int mathGrade;
 
-        public CommonMSC(string text, string year)
+        public CommonMSC(string text, int year)
         {
             pdfText = text;
             curriculumYear = year;
@@ -54,16 +54,21 @@ namespace DES3560.Curriculum.MSC
         {
             switch (curriculumYear)
             {
-                case "2014":
-                case "2015":
-                case "2016":
+                case 2014:
+                case 2015:
+                case 2016:
                     check2014Math();
-                    check2014Science();
+                    checkScience();
                     addMathGrade();
                     if (mathGrade + scienceGrade < 28)
                         unacquiredList.Add("MSC학점이 28학점 이상이어야 합니다.");
                     break;
-                case "2017":
+                case 2017:
+                    check2017Math();
+                    checkScience();
+                    addMathGrade();
+                    if (mathGrade + scienceGrade < 21)
+                        unacquiredList.Add("MSC학점이 21학점 이상이어야 합니다.");
                     break;
                 default:
                     break;
@@ -78,9 +83,18 @@ namespace DES3560.Curriculum.MSC
             if (!pdfText.Contains("확률및통계학"))
                 unacquiredList.Add("확률및통계학");
         }
-        private void check2014Science()
+        private void check2017Math()
         {
-            foreach(KeyValuePair<string, int> keyPair in subjectScience)
+            if (!pdfText.Contains("공학선형대수학"))
+                unacquiredList.Add("공학선형대수학");
+            if (!pdfText.Contains("미적분학및연습1"))
+                unacquiredList.Add("미적분학및연습1");
+            if (!pdfText.Contains("확률및통계학"))
+                unacquiredList.Add("확률및통계학");
+        }
+        private void checkScience()
+        {
+            foreach (KeyValuePair<string, int> keyPair in subjectScience)
             {
                 if (pdfText.Contains(keyPair.Key))
                     scienceGrade = scienceGrade + keyPair.Value;
@@ -90,11 +104,13 @@ namespace DES3560.Curriculum.MSC
         }
         private void addMathGrade()
         {
-            foreach(KeyValuePair<string, int> keyPair in subjectMath)
+            foreach (KeyValuePair<string, int> keyPair in subjectMath)
             {
                 if (pdfText.Contains(keyPair.Key))
                     mathGrade = mathGrade + keyPair.Value;
             }
+            if (mathGrade < 12)
+                unacquiredList.Add("수학 과목을 12학점 이상 수강하십시오.");
         }
     }
 }

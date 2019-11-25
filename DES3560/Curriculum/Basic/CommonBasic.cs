@@ -35,6 +35,9 @@ namespace DES3560.Curriculum.Basic
                 else
                     unacquiredBasic.Add(s);
             }
+            if (unacquiredBasic.Count >= 3)
+                unacquiredBasic.Add("중 최소 " + (unacquiredBasic.Count - 2).ToString()
+                                + "과목을 수강 하십시오.");
             basicGrade = (count * 3).ToString();
         }
     }

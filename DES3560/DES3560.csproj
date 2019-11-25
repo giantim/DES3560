@@ -49,8 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Curriculum\2014\Major2014.cs" />
     <Compile Include="Curriculum\Basic\CommonBasic.cs" />
+    <Compile Include="Curriculum\Major\MajorByCurri.cs" />
     <Compile Include="Curriculum\MSC\CommonMSC.cs" />
     <Compile Include="Curriculum\RGC\CommonRGC.cs" />
     <Compile Include="Form1.cs">
