@@ -1,6 +1,6 @@
-﻿namespace DES3560.Subject
+﻿namespace DES3560.Course
 {
-    class subjectCommon
+    public class PRICourse
     {
         public const string PRI4040 = "기술과사회";
         public const string PRI4041 = "공학경제";

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using DES3560.Subject;
+using DES3560.Course;
 
 namespace DES3560.Curriculum.Basic
 {
@@ -17,11 +17,11 @@ namespace DES3560.Curriculum.Basic
             subjectList = new List<string>();
             unacquiredBasic = new List<string>();
 
-            subjectList.Add(subjectCommon.PRI4040);
-            subjectList.Add(subjectCommon.PRI4041);
-            subjectList.Add(subjectCommon.PRI4043);
-            subjectList.Add(subjectCommon.PRI4048);
-            subjectList.Add(subjectCommon.EGC7026);
+            subjectList.Add(PRICourse.PRI4040);
+            subjectList.Add(PRICourse.PRI4041);
+            subjectList.Add(PRICourse.PRI4043);
+            subjectList.Add(PRICourse.PRI4048);
+            subjectList.Add(PRICourse.EGC7026);
 
             checkBasic();
         }

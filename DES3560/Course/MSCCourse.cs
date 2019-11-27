@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace DES3560.Subject
+namespace DES3560.Course
 {
-    public class subjectMSC
+    public class MSCCourse
     {
         public KeyValuePair<string, int> PRI4001 = new KeyValuePair<string, int>("미적분학및연습1", 3);
         public KeyValuePair<string, int> PRI4012 = new KeyValuePair<string, int>("미적분학및연습2", 3);

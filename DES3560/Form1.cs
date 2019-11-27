@@ -13,7 +13,7 @@ using DES3560.Curriculum.RGC;
 using DES3560.Curriculum.Basic;
 using DES3560.Curriculum.MSC;
 using DES3560.Curriculum.Major;
-using DES3560.Subject;
+using DES3560.Course;
 
 namespace DES3560
 {
@@ -31,6 +31,10 @@ namespace DES3560
         public float gpa;
         public int majorEng;
         public int subEngSum;
+        public List<Subject> rgcList;
+        public List<Subject> priList;
+        public List<Subject> cseList;
+        public List<Subject> desList;
 
         #region Functions
         public Form1()
@@ -125,15 +129,9 @@ namespace DES3560
         private string extractSubmajor()
         {
             string submajorString = pdfText.Substring(pdfText.IndexOf("복수1: ") + 5);
-            int index = 0;
-            foreach(char c in submajorString)
-            {
-                if (!(c >= 33 && c <= 126))
-                    index = index + 1;
-                else
-                    break;
-            }
-            return submajorString.Substring(0, index);
+            if (submajorString.Substring(0, 7) == "컴퓨터공학전공")
+                return "컴퓨터공학전공";
+            return String.Empty;
         }
         private bool checkClassification()
         {
@@ -147,14 +145,122 @@ namespace DES3560
                 return true;
             return false;
         }
+        private void parsePdf()
+        {
+            parseRGC();
+            parsePRI();
+            parseCSE();
+            parseDES();
+        }
+        private void parseRGC()
+        {
+            rgcList = new List<Subject>();
+            string temp = pdfText;
+            while (temp.Contains("RGC"))
+            {
+                string rgcText = temp.Substring(temp.IndexOf("RGC"));
+                string subjectID = rgcText.Substring(0, 7);
+                string subjectName = rgcText.Substring(rgcText.IndexOf(subjectID) + subjectID.Length + 1, 
+                                    getSpaceIndex(rgcText.Substring(rgcText.IndexOf(subjectID) + subjectID.Length + 1), 0));
+                int subjectGrade = Int32.Parse(rgcText.Substring(rgcText.IndexOf(subjectName) + subjectName.Length
+                                    + jumpNonSpace(rgcText.Substring(rgcText.IndexOf(subjectName) + subjectName.Length), 0), 1));
+                Subject tempSubject = new Subject 
+                { 
+                    subjectID = subjectID,
+                    subjectName = subjectName,
+                    subjectGrade = subjectGrade,
+                };
+                rgcList.Add(tempSubject);
+                temp = temp.Substring(temp.IndexOf(subjectName));
+            }
+        }
+        private void parsePRI()
+        {
+            priList = new List<Subject>();
+            string temp = pdfText;
+            while (temp.Contains("PRI"))
+            {
+                string priText = temp.Substring(temp.IndexOf("PRI"));
+                string subjectID = priText.Substring(0, 7);
+                string subjectName = priText.Substring(priText.IndexOf(subjectID) + subjectID.Length + 1,
+                                    getSpaceIndex(priText.Substring(priText.IndexOf(subjectID) + subjectID.Length + 1), 0));
+                int subjectGrade = Int32.Parse(priText.Substring(priText.IndexOf(subjectName) + subjectName.Length
+                                    + jumpNonSpace(priText.Substring(priText.IndexOf(subjectName) + subjectName.Length), 0), 1));
+                Subject tempSubject = new Subject
+                {
+                    subjectID = subjectID,
+                    subjectName = subjectName,
+                    subjectGrade = subjectGrade,
+                };
+                priList.Add(tempSubject);
+                temp = temp.Substring(temp.IndexOf(subjectName));
+            }
+        }
+        private void parseCSE()
+        {
+            cseList = new List<Subject>();
+            string temp = pdfText;
+            while (temp.Contains("CSE"))
+            {
+                string cseText = temp.Substring(temp.IndexOf("CSE"));
+                string subjectID = cseText.Substring(0, 7);
+                string subjectName = cseText.Substring(cseText.IndexOf(subjectID) + subjectID.Length + 1,
+                                    getSpaceIndex(cseText.Substring(cseText.IndexOf(subjectID) + subjectID.Length + 1), 0));
+                int subjectGrade = Int32.Parse(cseText.Substring(cseText.IndexOf(subjectName) + subjectName.Length
+                                    + jumpNonSpace(cseText.Substring(cseText.IndexOf(subjectName) + subjectName.Length), 0), 1));
+                Subject tempSubject = new Subject
+                {
+                    subjectID = subjectID,
+                    subjectName = subjectName,
+                    subjectGrade = subjectGrade,
+                };
+                cseList.Add(tempSubject);
+                temp = temp.Substring(temp.IndexOf(subjectName));
+            }
+        }
+        private void parseDES()
+        {
+            desList = new List<Subject>();
+            string temp = pdfText;
+            while (temp.Contains("DES"))
+            {
+                string desText = temp.Substring(temp.IndexOf("DES"));
+                string subjectID = desText.Substring(0, 7);
+                string subjectName = desText.Substring(desText.IndexOf(subjectID) + subjectID.Length + 1,
+                                    getSpaceIndex(desText.Substring(desText.IndexOf(subjectID) + subjectID.Length + 1), 0));
+                int subjectGrade = 1;
+                Subject tempSubject = new Subject
+                {
+                    subjectID = subjectID,
+                    subjectName = subjectName,
+                    subjectGrade = subjectGrade,
+                };
+                desList.Add(tempSubject);
+                temp = temp.Substring(temp.IndexOf(subjectName));
+            }
+        }
+        private int getSpaceIndex(string text, int index)
+        {
+            int i = 0;
+            while (!text[index + i].Equals(' '))
+                i = i + 1;
+            return index + i;
+        }
+        private int jumpNonSpace(string text, int index)
+        {
+            int i = 0;
+            while (text[index + i].Equals(' '))
+                i = i + 1;
+            return index + i;
+        }
         private void analysis()
         {
-            analysisStudentInfo();
-            analysisRGC();
-            analysisBasic();
-            analysisMSC();
-            analysisMajor();
-            analysisStandard();
+            //analysisStudentInfo();
+            //analysisRGC();
+            //analysisBasic();
+            //analysisMSC();
+            //analysisMajor();
+            //analysisStandard();
         }
         private void analysisStudentInfo()
         {
@@ -302,7 +408,8 @@ namespace DES3560
                 if (checkMajor())
                 {
                     turnOnTable();
-                    analysis();
+                    parsePdf();
+                    //analysis();
                 }
                 else
                     MessageBox.Show("컴퓨터공학을 전공하고 있지 않은 학생입니다.", "오류", MessageBoxButtons.OK);

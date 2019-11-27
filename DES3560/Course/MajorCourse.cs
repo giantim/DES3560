@@ -1,6 +1,6 @@
-﻿namespace DES3560.Subject
+﻿namespace DES3560.Course
 {
-    public class subjectMajor
+    public class MajorCourse
     {
         // Common
         public const string CSE2016 = "창의적공학설계";

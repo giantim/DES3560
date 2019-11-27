@@ -1,4 +1,4 @@
-﻿using DES3560.Subject;
+﻿using DES3560.Course;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,17 +40,17 @@ namespace DES3560.Curriculum.Major
         }
         private void addSubject(int year)
         {
-            subjectList.Add(subjectMajor.CSE2016);
-            subjectList.Add(subjectMajor.CSE4074);
-            subjectList.Add(subjectMajor.CSE4066);
-            subjectList.Add(subjectMajor.CSE4067);
-            subjectList.Add(subjectMajor.CSE2017);
-            subjectList.Add(subjectMajor.CSE2018);
-            subjectList.Add(subjectMajor.CSE2013);
+            subjectList.Add(MajorCourse.CSE2016);
+            subjectList.Add(MajorCourse.CSE4074);
+            subjectList.Add(MajorCourse.CSE4066);
+            subjectList.Add(MajorCourse.CSE4067);
+            subjectList.Add(MajorCourse.CSE2017);
+            subjectList.Add(MajorCourse.CSE2018);
+            subjectList.Add(MajorCourse.CSE2013);
             if (year == 2017)
             {
-                subjectList.Add(subjectMajor.CSE2025);
-                subjectList.Add(subjectMajor.CSE2026);
+                subjectList.Add(MajorCourse.CSE2025);
+                subjectList.Add(MajorCourse.CSE2026);
             }
         }
         private void checkMajor()

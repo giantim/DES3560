@@ -1,6 +1,6 @@
-﻿namespace DES3560.Subject
+﻿namespace DES3560.Course
 {
-    class subjectRGC
+    public class RGCCourse
     {
         public const string RGC0017 = "자아와명상1";
         public const string RGC0018 = "자아와명상2";

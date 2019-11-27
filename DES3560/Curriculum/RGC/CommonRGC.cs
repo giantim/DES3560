@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using DES3560.Subject;
+using DES3560.Course;
 
 namespace DES3560.Curriculum.RGC
 {
@@ -10,7 +10,6 @@ namespace DES3560.Curriculum.RGC
         public List<string> unacquiredRGC;
         public string RGCGrade;
 
-        #region Functions
         public CommonRGC(string text)
         {
             pdfText = text;
@@ -18,13 +17,13 @@ namespace DES3560.Curriculum.RGC
             subjectList = new List<string>();
             unacquiredRGC = new List<string>();
 
-            subjectList.Add(subjectRGC.RGC0017);
-            subjectList.Add(subjectRGC.RGC0018);
-            subjectList.Add(subjectRGC.RGC0003);
-            subjectList.Add(subjectRGC.RGC1001);
-            subjectList.Add(subjectRGC.RGC0005);
-            subjectList.Add(subjectRGC.RGC1033);
-            subjectList.Add(subjectRGC.RGC1034);
+            subjectList.Add(RGCCourse.RGC0017);
+            subjectList.Add(RGCCourse.RGC0018);
+            subjectList.Add(RGCCourse.RGC0003);
+            subjectList.Add(RGCCourse.RGC1001);
+            subjectList.Add(RGCCourse.RGC0005);
+            subjectList.Add(RGCCourse.RGC1033);
+            subjectList.Add(RGCCourse.RGC1034);
 
             checkRGC();
         }
@@ -35,11 +34,10 @@ namespace DES3560.Curriculum.RGC
                 if (!pdfText.Contains(s))
                     unacquiredRGC.Add(s);
             }
-            if (!(pdfText.Contains(subjectRGC.RGC1050) || pdfText.Contains(subjectRGC.RGC1051)
-                || pdfText.Contains(subjectRGC.RGC1052)))
+            if (!(pdfText.Contains(RGCCourse.RGC1050) || pdfText.Contains(RGCCourse.RGC1051)
+                || pdfText.Contains(RGCCourse.RGC1052)))
                 unacquiredRGC.Add("리더십");
             RGCGrade = pdfText.Substring(pdfText.IndexOf("공통교양: 총") + 7, 2);
         }
-        #endregion
     }
 }
