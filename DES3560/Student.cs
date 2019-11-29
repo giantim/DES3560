@@ -14,5 +14,10 @@ namespace DES3560
         public string name;
         public string major;
         public bool submajor;
+
+        public List<Subject> rgcList;
+        public List<Subject> priList;
+        public List<Subject> cseList;
+        public List<Subject> desList;
     }
 }

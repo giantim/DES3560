@@ -31,10 +31,6 @@ namespace DES3560
         public float gpa;
         public int majorEng;
         public int subEngSum;
-        public List<Subject> rgcList;
-        public List<Subject> priList;
-        public List<Subject> cseList;
-        public List<Subject> desList;
 
         #region Functions
         public Form1()
@@ -85,20 +81,18 @@ namespace DES3560
         }
         private void initStudentInfo()
         {
-            int curriculumYear = Int32.Parse(pdfText.Substring(pdfText.IndexOf("교육과정 적용년도: ") + 11, 4));
-            string studentClass = pdfText.Substring(pdfText.IndexOf(" 학번: ") - 3, 3);
-            string studentId = pdfText.Substring(pdfText.IndexOf("학번: ") + 4, 10);
-            string name = extractName();
-            string major = extractMajor();
-            string submajor = extractSubmajor();
             studentInfo = new Student
             {
-                curriculumYear = curriculumYear,
-                studentClass = studentClass,
-                studentId = studentId,
-                name = name,
-                major = major,
-                submajor = submajor == "" ? false : true,
+                curriculumYear = Int32.Parse(pdfText.Substring(pdfText.IndexOf("교육과정 적용년도: ") + 11, 4)),
+                studentClass = pdfText.Substring(pdfText.IndexOf(" 학번: ") - 3, 3),
+                studentId = pdfText.Substring(pdfText.IndexOf("학번: ") + 4, 10),
+                name = extractName(),
+                major = extractMajor(),
+                submajor = extractSubmajor() == "" ? false : true,
+                rgcList = parseRGC(),
+                priList = parsePRI(),
+                cseList = parseCSE(),
+                desList = parseDES(),
             };
         }
         private string extractName()
@@ -118,7 +112,7 @@ namespace DES3560
         {
             string majorString = pdfText.Substring(pdfText.IndexOf("학과 : ") + 5);
             int index = 0;
-            foreach(char c in majorString)
+            foreach (char c in majorString)
             {
                 if (!c.Equals(' '))
                     index = index + 1;
@@ -145,27 +139,20 @@ namespace DES3560
                 return true;
             return false;
         }
-        private void parsePdf()
+        private List<Subject> parseRGC()
         {
-            parseRGC();
-            parsePRI();
-            parseCSE();
-            parseDES();
-        }
-        private void parseRGC()
-        {
-            rgcList = new List<Subject>();
+            List<Subject> rgcList = new List<Subject>();
             string temp = pdfText;
             while (temp.Contains("RGC"))
             {
                 string rgcText = temp.Substring(temp.IndexOf("RGC"));
                 string subjectID = rgcText.Substring(0, 7);
-                string subjectName = rgcText.Substring(rgcText.IndexOf(subjectID) + subjectID.Length + 1, 
+                string subjectName = rgcText.Substring(rgcText.IndexOf(subjectID) + subjectID.Length + 1,
                                     getSpaceIndex(rgcText.Substring(rgcText.IndexOf(subjectID) + subjectID.Length + 1), 0));
                 int subjectGrade = Int32.Parse(rgcText.Substring(rgcText.IndexOf(subjectName) + subjectName.Length
                                     + jumpNonSpace(rgcText.Substring(rgcText.IndexOf(subjectName) + subjectName.Length), 0), 1));
-                Subject tempSubject = new Subject 
-                { 
+                Subject tempSubject = new Subject
+                {
                     subjectID = subjectID,
                     subjectName = subjectName,
                     subjectGrade = subjectGrade,
@@ -173,10 +160,11 @@ namespace DES3560
                 rgcList.Add(tempSubject);
                 temp = temp.Substring(temp.IndexOf(subjectName));
             }
+            return rgcList;
         }
-        private void parsePRI()
+        private List<Subject> parsePRI()
         {
-            priList = new List<Subject>();
+            List<Subject> priList = new List<Subject>();
             string temp = pdfText;
             while (temp.Contains("PRI"))
             {
@@ -195,10 +183,11 @@ namespace DES3560
                 priList.Add(tempSubject);
                 temp = temp.Substring(temp.IndexOf(subjectName));
             }
+            return priList;
         }
-        private void parseCSE()
+        private List<Subject> parseCSE()
         {
-            cseList = new List<Subject>();
+            List<Subject> cseList = new List<Subject>();
             string temp = pdfText;
             while (temp.Contains("CSE"))
             {
@@ -217,10 +206,11 @@ namespace DES3560
                 cseList.Add(tempSubject);
                 temp = temp.Substring(temp.IndexOf(subjectName));
             }
+            return cseList;
         }
-        private void parseDES()
+        private List<Subject> parseDES()
         {
-            desList = new List<Subject>();
+            List<Subject> desList = new List<Subject>();
             string temp = pdfText;
             while (temp.Contains("DES"))
             {
@@ -238,6 +228,7 @@ namespace DES3560
                 desList.Add(tempSubject);
                 temp = temp.Substring(temp.IndexOf(subjectName));
             }
+            return desList;
         }
         private int getSpaceIndex(string text, int index)
         {
@@ -257,10 +248,11 @@ namespace DES3560
         {
             //analysisStudentInfo();
             //analysisRGC();
-            //analysisBasic();
             //analysisMSC();
             //analysisMajor();
             //analysisStandard();
+            analysisStudentInfo();
+            analysisBasic();
         }
         private void analysisStudentInfo()
         {
@@ -268,19 +260,19 @@ namespace DES3560
             lblMyStudentId.Text = studentInfo.studentId;
             lblMyClass.Text = studentInfo.studentClass;
             lblMySubMajor.Text = studentInfo.submajor == false ? "x" : "o";
-
+        }
+        private void analysisBasic()
+        {
+            myBasic = new CommonBasic();
+            myBasic.checkBasic(studentInfo.priList);
+            lblMyBasic.Text = myBasic.basicGrade.ToString() + " / 9";
+            txtBasic.Text = String.Join(Environment.NewLine, myBasic.unacquiredList);
         }
         private void analysisRGC()
         {
             myRGC = new CommonRGC(pdfText);
             lblMyRGC.Text = myRGC.RGCGrade + " / 16";
-            txtRGC.Text = String.Join(Environment.NewLine, myRGC.unacquiredRGC);
-        }
-        private void analysisBasic()
-        {
-            myBasic = new CommonBasic(pdfText);
-            lblMyBasic.Text = myBasic.basicGrade + " / 9";
-            txtBasic.Text = String.Join(Environment.NewLine, myBasic.unacquiredBasic);
+            txtRGC.Text = String.Join(Environment.NewLine, myRGC.unacquiredList);
         }
         private void analysisMSC()
         {
@@ -320,7 +312,7 @@ namespace DES3560
         private int countDesignMajor(List<string> list)
         {
             int count = 0;
-            foreach(string s in list)
+            foreach (string s in list)
             {
                 if (s.Equals("컴퓨터공학종합설계1") || s.Equals("컴퓨터공학종합설계2"))
                     count = count + 1;
@@ -347,11 +339,11 @@ namespace DES3560
         {
             string gpaString = pdfText.Substring(pdfText.IndexOf("총취득학점:") + 6);
             int index = 0;
-            foreach(char c in gpaString)
+            foreach (char c in gpaString)
             {
                 if (!c.Equals(' ') && c != 10)
                     index = index + 1;
-                else 
+                else
                     break;
             }
             return Int32.Parse(gpaString.Substring(0, index));
@@ -360,7 +352,7 @@ namespace DES3560
         {
             if (studentInfo.submajor == true)
             {
-                if (Int32.Parse(myBasic.basicGrade) >= 9 && myRGC.unacquiredRGC.Count == 0
+                if (myBasic.basicGrade >= 9 && myRGC.unacquiredList.Count == 0
                 && myMSC.unacquiredList.Count == 0 && myMajor.unacquiredMajor.Count == 0
                 && myMajor.allGrade >= 84 && myMajor.designGrade >= 12 && myMajor.specialGrade >= 42
                 && allGrade >= 140 && gpa >= 2.0 && majorEng >= 2 && subEngSum >= 4
@@ -370,7 +362,7 @@ namespace DES3560
             }
             else
             {
-                if (Int32.Parse(myBasic.basicGrade) >= 9 && myRGC.unacquiredRGC.Count == 0
+                if (myBasic.basicGrade >= 9 && myRGC.unacquiredList.Count == 0
                 && myMSC.unacquiredList.Count == 0 && myMajor.unacquiredMajor.Count == 0
                 && myMajor.allGrade >= 51 && myMajor.designGrade >= 12 && myMajor.specialGrade >= 26
                 && allGrade >= 140 && gpa >= 2.0 && majorEng >= 2 && subEngSum >= 4
@@ -401,18 +393,19 @@ namespace DES3560
         }
         private void btnExecution_Click(object sender, EventArgs e)
         {
-
             if (extractTextFromPdf())
             {
                 initStudentInfo();
                 if (checkMajor())
                 {
                     turnOnTable();
-                    parsePdf();
-                    //analysis();
+                    analysis();
                 }
                 else
+                {
+                    turnOffTable();
                     MessageBox.Show("컴퓨터공학을 전공하고 있지 않은 학생입니다.", "오류", MessageBoxButtons.OK);
+                }
             }
         }
         #endregion
