@@ -5,6 +5,7 @@
         public string subjectID;
         public string subjectName;
         public int subjectGrade;
+        public string subjectCategory;
 
         public bool compare(Subject s)
         {

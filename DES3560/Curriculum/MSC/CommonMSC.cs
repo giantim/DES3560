@@ -17,7 +17,7 @@ namespace DES3560.Curriculum.MSC
         public int scienceGrade;
         public int mathGrade;
 
-        public CommonMSC(string text, int year)
+        public CommonMSC(int year)
         {
             curriculumYear = year;
             scienceGrade = 0;
@@ -184,6 +184,23 @@ namespace DES3560.Curriculum.MSC
             checkReqMath(list);
             checkMath(list);
             checkScience(list);
+            sumGrade();
+        }
+        private void sumGrade()
+        {
+            switch (curriculumYear)
+            {
+                case 2014:
+                case 2015:
+                case 2016:
+                    if (mathGrade + scienceGrade < 28)
+                        unacquiredList.Add("MSC를 최소 28학점 이상 수강하십시오.");
+                    break;
+                default:
+                    if (mathGrade + scienceGrade < 21)
+                        unacquiredList.Add("MSC를 최소 28학점 이상 수강하십시오.");
+                    break;
+            }
         }
         private void checkReqMath(List<Subject> list)
         {
@@ -192,13 +209,14 @@ namespace DES3560.Curriculum.MSC
                 int index = 0;
                 foreach (Subject s2 in list)
                 {
-                    if (!s1.compare(s2))
-                        index = index + 1;  
+                    if (s1.compare(s2))
+                        break;
+                    index = index + 1;
                 }
                 if (index.Equals(list.Count))
                     unacquiredList.Add(s1.subjectName);
             }
-            mathGrade = 9 - (unacquiredList.Count * 3);
+            mathGrade = mathGrade + (9 - (unacquiredList.Count * 3));
         }
         private void checkMath(List<Subject> list)
         {
@@ -217,7 +235,7 @@ namespace DES3560.Curriculum.MSC
                 if (i.Equals(list.Count))
                     index = index + 1;
             }
-            mathGrade = 15 - (subjectMath.Count * 3);
+            mathGrade = mathGrade + (15 - (subjectMath.Count * 3));
         }
         private void checkScience(List<Subject> list)
         {

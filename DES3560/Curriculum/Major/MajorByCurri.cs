@@ -9,99 +9,142 @@ namespace DES3560.Curriculum.Major
 {
     public class MajorByCurri
     {
-        public string pdfText;
         public int curriYear;
-        public bool submajor;
-        public List<string> subjectList;
-        public List<string> unacquiredMajor;
+        public List<Subject> subjectList;
+        public List<string> unacquiredList;
         public int allGrade;
         public int designGrade;
         public int specialGrade;
 
-        public MajorByCurri(string text, int year, bool isSubmajor)
+        public MajorByCurri(int year)
         {
-            pdfText = text;
-            if (year < 2017)
-                curriYear = 2014;
-            else
-                curriYear = 2017;
-            submajor = isSubmajor;
-
-            subjectList = new List<string>();
-            unacquiredMajor = new List<string>();
-
-            addSubject(curriYear);
-
+            curriYear = year < 2017 ? 2014 : 2017;
+            subjectList = new List<Subject>();
+            unacquiredList = new List<string>();
             allGrade = 0;
             designGrade = 0;
             specialGrade = 0;
 
-            checkMajor();
+            addSubject(curriYear);
         }
         private void addSubject(int year)
         {
-            subjectList.Add(MajorCourse.CSE2016);
-            subjectList.Add(MajorCourse.CSE4074);
-            subjectList.Add(MajorCourse.CSE4066);
-            subjectList.Add(MajorCourse.CSE4067);
-            subjectList.Add(MajorCourse.CSE2017);
-            subjectList.Add(MajorCourse.CSE2018);
-            subjectList.Add(MajorCourse.CSE2013);
+            subjectList.Add(new Subject
+            {
+                subjectID = "CSE2016",
+                subjectName = "창의적공학설계",
+                subjectGrade = 3,
+                subjectCategory = "기초",
+            });
+            subjectList.Add(new Subject
+            {
+                subjectID = "CSE4074",
+                subjectName = "공개SW프로젝트",
+                subjectGrade = 3,
+                subjectCategory = "전문",
+            });
+            subjectList.Add(new Subject
+            {
+                subjectID = "CSE4066",
+                subjectName = "컴퓨터공학종합설계1",
+                subjectGrade = 3,
+                subjectCategory = "전문",
+            });
+            subjectList.Add(new Subject
+            {
+                subjectID = "CSE4067",
+                subjectName = "컴퓨터공학종합설계2",
+                subjectGrade = 3,
+                subjectCategory = "전문",
+            });
+            subjectList.Add(new Subject
+            {
+                subjectID = "CSE2017",
+                subjectName = "자료구조와실습",
+                subjectGrade = 3,
+                subjectCategory = "기초",
+            });
+            subjectList.Add(new Subject
+            {
+                subjectID = "CSE2013",
+                subjectName = "시스템소프트웨어와실습",
+                subjectGrade = 3,
+                subjectCategory = "기초",
+            });
+            subjectList.Add(new Subject
+            {
+                subjectID = "CSE2018",
+                subjectName = "컴퓨터구성",
+                subjectGrade = 3,
+                subjectCategory = "기초",
+            });
             if (year == 2017)
             {
-                subjectList.Add(MajorCourse.CSE2025);
-                subjectList.Add(MajorCourse.CSE2026);
-            }
-        }
-        private void checkMajor()
-        {
-            extractGrade();
-            checkDesignSubject();
-            checkAllMajor();
-        }
-        private void extractGrade()
-        {
-            if (submajor == false)
-            {
-                allGrade = Int32.Parse(pdfText.Substring(pdfText.IndexOf("제1전공: 총") + 7, 2));
-                specialGrade = Int32.Parse(pdfText.Substring(pdfText.IndexOf("제1전공: 총") + 24, 2));
-            }
-            else
-            {
-                allGrade = Int32.Parse(pdfText.Substring(pdfText.IndexOf("복수1: 총") + 6, 2));
-                specialGrade = Int32.Parse(pdfText.Substring(pdfText.IndexOf("복수1: 총") + 23, 2));
-            }
-        }
-        private void checkDesignSubject()
-        {
-            for (int i = 0; i < 4; i++)
-            {
-                if (pdfText.Contains(subjectList[i]))
-                    designGrade = designGrade + 3;
-            }
-        }
-        private void checkAllMajor()
-        {
-            foreach (string s in subjectList)
-            {
-                if (!pdfText.Contains(s))
+                subjectList.Add(new Subject
                 {
-                    if (s == "CSE4066")
-                        unacquiredMajor.Add("컴퓨터공학종합설계1");
-                    else if (s == "CSE4067")
-                        unacquiredMajor.Add("컴퓨터공학종합설계2");
-                    else
-                        unacquiredMajor.Add(s);
+                    subjectID = "CSE2025",
+                    subjectName = "계산적사고법",
+                    subjectGrade = 3,
+                    subjectCategory = "기초",
+                });
+                subjectList.Add(new Subject
+                {
+                    subjectID = "CSE2026",
+                    subjectName = "이산구조",
+                    subjectGrade = 3,
+                    subjectCategory = "기초",
+                });
+            }
+        }
+        public void checkMajor(List<Subject> cseList, List<Subject> desList)
+        {
+            checkCSE(cseList);
+            checkDES(desList);
+            sumGrade(cseList, desList);
+        }
+        private void checkCSE(List<Subject> list)
+        {
+            int index = 0;
+            while (index < subjectList.Count)
+            {
+                int i = 0;
+                Subject s1 = subjectList[index];
+                for (; i < list.Count; i++)
+                {
+                    if (s1.compare(list[i]))
+                    {
+                        subjectList.RemoveAt(index);
+                        break;
+                    }
+                }
+                if (i.Equals(list.Count))
+                {
+                    unacquiredList.Add(s1.subjectName);
+                    index = index + 1;
                 }
             }
-            int count = 0;
-            while (pdfText.Contains("개별연구"))
+        }
+        private void checkDES(List<Subject> list)
+        {
+            for (int i = 2; i > list.Count; i--)
+                unacquiredList.Add("개별연구" + i.ToString());
+        }
+        private void sumGrade(List<Subject> cseList, List<Subject> desList)
+        {
+            foreach (Subject s in cseList)
             {
-                pdfText = pdfText.Substring(pdfText.IndexOf("개별연구") + 4);
-                count = count + 1;
+                allGrade = allGrade + s.subjectGrade;
+                if (s.subjectID.Equals("CSE2016") || s.subjectID.Equals("CSE4074")
+                    || s.subjectID.Equals("CSE4066") || s.subjectID.Equals("CSE4067"))
+                    designGrade = designGrade + s.subjectGrade;
+                if (s.subjectCategory.Equals("전문"))
+                    specialGrade = specialGrade + s.subjectGrade;
             }
-            for (int i = 2; i > count; i--)
-                unacquiredMajor.Add("개별연구");
+            foreach (Subject s in desList)
+            {
+                allGrade = allGrade + s.subjectGrade;
+                specialGrade = specialGrade + s.subjectGrade;
+            }
         }
     }
 }

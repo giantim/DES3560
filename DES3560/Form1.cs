@@ -151,13 +151,13 @@ namespace DES3560
                                     getSpaceIndex(rgcText.Substring(rgcText.IndexOf(subjectID) + subjectID.Length + 1), 0));
                 int subjectGrade = Int32.Parse(rgcText.Substring(rgcText.IndexOf(subjectName) + subjectName.Length
                                     + jumpNonSpace(rgcText.Substring(rgcText.IndexOf(subjectName) + subjectName.Length), 0), 1));
-                Subject tempSubject = new Subject
+                rgcList.Add(new Subject 
                 {
                     subjectID = subjectID,
                     subjectName = subjectName,
                     subjectGrade = subjectGrade,
-                };
-                rgcList.Add(tempSubject);
+                    subjectCategory = "",
+                });
                 temp = temp.Substring(temp.IndexOf(subjectName));
             }
             return rgcList;
@@ -174,13 +174,13 @@ namespace DES3560
                                     getSpaceIndex(priText.Substring(priText.IndexOf(subjectID) + subjectID.Length + 1), 0));
                 int subjectGrade = Int32.Parse(priText.Substring(priText.IndexOf(subjectName) + subjectName.Length
                                     + jumpNonSpace(priText.Substring(priText.IndexOf(subjectName) + subjectName.Length), 0), 1));
-                Subject tempSubject = new Subject
+                priList.Add(new Subject 
                 {
                     subjectID = subjectID,
                     subjectName = subjectName,
                     subjectGrade = subjectGrade,
-                };
-                priList.Add(tempSubject);
+                    subjectCategory = "",
+                });
                 temp = temp.Substring(temp.IndexOf(subjectName));
             }
             return priList;
@@ -197,14 +197,29 @@ namespace DES3560
                                     getSpaceIndex(cseText.Substring(cseText.IndexOf(subjectID) + subjectID.Length + 1), 0));
                 int subjectGrade = Int32.Parse(cseText.Substring(cseText.IndexOf(subjectName) + subjectName.Length
                                     + jumpNonSpace(cseText.Substring(cseText.IndexOf(subjectName) + subjectName.Length), 0), 1));
-                Subject tempSubject = new Subject
+                string categoryText = cseText.Substring(cseText.IndexOf(subjectName) + subjectName.Length
+                                    + jumpNonSpace(cseText.Substring(cseText.IndexOf(subjectName) + subjectName.Length), 0) + 1);
+                string subjectCategory = categoryText.Substring(jumpNonSpace(categoryText, 0), 2);
+                if (!subjectCategory.Equals("기초") && !subjectCategory.Equals("전문"))
+                    subjectCategory = categoryText.Substring(jumpNonSpace(categoryText, 0) + 3, 2); 
+                cseList.Add(new Subject 
                 {
                     subjectID = subjectID,
                     subjectName = subjectName,
                     subjectGrade = subjectGrade,
-                };
-                cseList.Add(tempSubject);
+                    subjectCategory = subjectCategory,
+                });
                 temp = temp.Substring(temp.IndexOf(subjectName));
+            }
+            if (temp.Contains("CIC4003"))
+            {
+                cseList.Add(new Subject
+                {
+                    subjectID = "CIC4003",
+                    subjectName = "인턴쉽",
+                    subjectGrade = 3,
+                    subjectCategory = "전문",
+                });
             }
             return cseList;
         }
@@ -219,13 +234,13 @@ namespace DES3560
                 string subjectName = desText.Substring(desText.IndexOf(subjectID) + subjectID.Length + 1,
                                     getSpaceIndex(desText.Substring(desText.IndexOf(subjectID) + subjectID.Length + 1), 0));
                 int subjectGrade = 1;
-                Subject tempSubject = new Subject
+                desList.Add(new Subject 
                 {
                     subjectID = subjectID,
                     subjectName = subjectName,
                     subjectGrade = subjectGrade,
-                };
-                desList.Add(tempSubject);
+                    subjectCategory = "전문",
+                });
                 temp = temp.Substring(temp.IndexOf(subjectName));
             }
             return desList;
@@ -246,13 +261,11 @@ namespace DES3560
         }
         private void analysis()
         {
-            //analysisStudentInfo();
-            //analysisRGC();
-            //analysisMSC();
-            //analysisMajor();
-            //analysisStandard();
             analysisStudentInfo();
+            analysisRGC();
             analysisBasic();
+            analysisMSC();
+            analysisMajor();
         }
         private void analysisStudentInfo()
         {
@@ -270,13 +283,13 @@ namespace DES3560
         }
         private void analysisRGC()
         {
-            myRGC = new CommonRGC(pdfText);
-            lblMyRGC.Text = myRGC.RGCGrade + " / 16";
-            txtRGC.Text = String.Join(Environment.NewLine, myRGC.unacquiredList);
+            myRGC = new CommonRGC(studentInfo.rgcList);
+            lblMyRGC.Text = myRGC.RGCGrade.ToString() + " / 16";
         }
         private void analysisMSC()
         {
-            myMSC = new CommonMSC(pdfText, studentInfo.curriculumYear);
+            myMSC = new CommonMSC(studentInfo.curriculumYear);
+            myMSC.checkMSC(studentInfo.priList);
             if (studentInfo.curriculumYear < 2017)
             {
                 lblMyMath.Text = myMSC.mathGrade.ToString();
@@ -284,16 +297,17 @@ namespace DES3560
             }
             else
             {
-                lblMyMath.Text = myMSC.mathGrade.ToString() + lblMyMath.Text;
-                lblMyScience.Text = myMSC.scienceGrade.ToString() + lblMyScience.Text;
+                lblMyMath.Text = myMSC.mathGrade.ToString() + " / 12";
+                lblMyScience.Text = myMSC.scienceGrade.ToString() + " / 6";
             }
             txtMSC.Text = String.Join(Environment.NewLine, myMSC.unacquiredList);
         }
         private void analysisMajor()
         {
             paperPass = false;
-            myMajor = new MajorByCurri(pdfText, studentInfo.curriculumYear, studentInfo.submajor);
-            if (studentInfo.submajor == false)
+            myMajor = new MajorByCurri(studentInfo.curriculumYear);
+            myMajor.checkMajor(studentInfo.cseList, studentInfo.desList);
+            if (studentInfo.submajor.Equals(false))
             {
                 lblMyMajorSum.Text = myMajor.allGrade.ToString() + " / 84";
                 lblMySpecial.Text = myMajor.specialGrade.ToString() + " / 52";
@@ -304,20 +318,20 @@ namespace DES3560
                 lblMySpecial.Text = myMajor.specialGrade.ToString() + " / 26";
             }
             lblMyDesign.Text = myMajor.designGrade.ToString() + " / 12";
-            txtMajor.Text = String.Join(Environment.NewLine, myMajor.unacquiredMajor);
-            int designCount = countDesignMajor(myMajor.unacquiredMajor);
-            if (designCount == 0)
-                paperPass = true;
+            txtMajor.Text = String.Join(Environment.NewLine, myMajor.unacquiredList);
+            analysisPaper(myMajor.unacquiredList);
         }
-        private int countDesignMajor(List<string> list)
+        private void analysisPaper(List<string> list)
         {
+            paperPass = false;
             int count = 0;
             foreach (string s in list)
             {
                 if (s.Equals("컴퓨터공학종합설계1") || s.Equals("컴퓨터공학종합설계2"))
                     count = count + 1;
             }
-            return count;
+            if (count.Equals(0))
+                paperPass = true;
         }
         private void analysisStandard()
         {
@@ -352,8 +366,8 @@ namespace DES3560
         {
             if (studentInfo.submajor == true)
             {
-                if (myBasic.basicGrade >= 9 && myRGC.unacquiredList.Count == 0
-                && myMSC.unacquiredList.Count == 0 && myMajor.unacquiredMajor.Count == 0
+                if (myBasic.basicGrade >= 9 && myRGC.RGCGrade >= 16
+                && myMSC.unacquiredList.Count == 0 && myMajor.unacquiredList.Count == 0
                 && myMajor.allGrade >= 84 && myMajor.designGrade >= 12 && myMajor.specialGrade >= 42
                 && allGrade >= 140 && gpa >= 2.0 && majorEng >= 2 && subEngSum >= 4
                 && paperPass == true)
@@ -362,8 +376,8 @@ namespace DES3560
             }
             else
             {
-                if (myBasic.basicGrade >= 9 && myRGC.unacquiredList.Count == 0
-                && myMSC.unacquiredList.Count == 0 && myMajor.unacquiredMajor.Count == 0
+                if (myBasic.basicGrade >= 9 && myRGC.RGCGrade >= 16
+                && myMSC.unacquiredList.Count == 0 && myMajor.unacquiredList.Count == 0
                 && myMajor.allGrade >= 51 && myMajor.designGrade >= 12 && myMajor.specialGrade >= 26
                 && allGrade >= 140 && gpa >= 2.0 && majorEng >= 2 && subEngSum >= 4
                 && paperPass == true)
