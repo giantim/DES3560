@@ -266,6 +266,7 @@ namespace DES3560
             analysisBasic();
             analysisMSC();
             analysisMajor();
+            analysisStandard();
         }
         private void analysisStudentInfo()
         {
@@ -337,8 +338,8 @@ namespace DES3560
         {
             allGrade = extractAllGrade();
             gpa = float.Parse(pdfText.Substring(pdfText.IndexOf("평점평균:") + 5, 4));
-            majorEng = Int32.Parse(pdfText.Substring(pdfText.IndexOf("영어강의이수결과: ") + 14, 2));
-            subEngSum = Int32.Parse(pdfText.Substring(pdfText.IndexOf("영어강의이수결과: ") + 29, 2));
+            majorEng = countMajorEng();
+            subEngSum = countAllEng();
             string toeic = pdfText.Substring(pdfText.IndexOf("영어패스제(토익 등): ") + 18, 4);
             lblMyMajorEng.Text = majorEng.ToString() + " / 2";
             lblMyTotalEng.Text = subEngSum.ToString() + " / 4";
@@ -346,8 +347,8 @@ namespace DES3560
             lblMyPaper.Text = paperPass ? "o" : "x";
             lblMyAllGrade.Text = allGrade.ToString() + " / 140";
             lblMyGPA.Text = gpa.ToString();
-            lblMyEngineering.Text = checkEngineering();
-            lblMyGraduate.Text = checkGraduate();
+            //lblMyEngineering.Text = checkEngineering();
+            //lblMyGraduate.Text = checkGraduate();
         }
         private int extractAllGrade()
         {
@@ -362,9 +363,29 @@ namespace DES3560
             }
             return Int32.Parse(gpaString.Substring(0, index));
         }
+        private int countMajorEng()
+        {
+            int count = 0;
+            foreach (Subject s in studentInfo.cseList)
+            {
+                if (s.subjectName.Contains("<영어>"))
+                    count = count + 1;
+            }
+            return count;
+        }
+        private int countAllEng()
+        {
+            int count = countMajorEng();
+            foreach (Subject s in studentInfo.rgcList)
+            {
+                if (s.subjectName.Contains("<영어>"))
+                    count = count + 1;
+            }
+            return count;
+        }
         private string checkEngineering()
         {
-            if (studentInfo.submajor == true)
+            if (studentInfo.submajor.Equals(false))
             {
                 if (myBasic.basicGrade >= 9 && myRGC.RGCGrade >= 16
                 && myMSC.unacquiredList.Count == 0 && myMajor.unacquiredList.Count == 0
