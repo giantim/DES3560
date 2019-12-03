@@ -13,7 +13,6 @@ using DES3560.Curriculum.RGC;
 using DES3560.Curriculum.Basic;
 using DES3560.Curriculum.MSC;
 using DES3560.Curriculum.Major;
-using DES3560.Course;
 
 namespace DES3560
 {
@@ -347,8 +346,8 @@ namespace DES3560
             lblMyPaper.Text = paperPass ? "o" : "x";
             lblMyAllGrade.Text = allGrade.ToString() + " / 140";
             lblMyGPA.Text = gpa.ToString();
-            //lblMyEngineering.Text = checkEngineering();
-            //lblMyGraduate.Text = checkGraduate();
+            lblMyEngineering.Text = checkEngineering();
+            lblMyGraduate.Text = checkGraduate();
         }
         private int extractAllGrade()
         {

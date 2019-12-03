@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DES3560.Course;
+﻿using System.Collections.Generic;
 
 namespace DES3560.Curriculum.MSC
 {
