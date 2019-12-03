@@ -62,10 +62,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Student.cs" />
-    <Compile Include="Course\PRICourse.cs" />
-    <Compile Include="Course\MajorCourse.cs" />
-    <Compile Include="Course\MSCCourse.cs" />
-    <Compile Include="Course\RGCCourse.cs" />
     <Compile Include="Subject.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
