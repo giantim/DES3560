@@ -43,12 +43,14 @@ namespace DES3560
             tableStudentInfo.Visible = false;
             tableSubject.Visible = false;
             tableStandard.Visible = false;
+            tableStudentInfoException.Visible = false;
         }
         private void turnOnTable()
         {
             tableStudentInfo.Visible = true;
             tableSubject.Visible = true;
             tableStandard.Visible = true;
+            tableStudentInfoException.Visible = true;
         }
         private bool extractTextFromPdf()
         {
@@ -78,6 +80,22 @@ namespace DES3560
                 return false;
             }
         }
+        private bool checkClassification()
+        {
+            if (pdfText.Substring(0, 13).Equals("취득교과목 영역별 분류표"))
+                return true;
+            return false;
+        }
+        private bool checkMajor()
+        {
+            if (studentInfo.major.Equals("컴퓨터공학전공"))
+                return true;
+            if (!studentInfo.minor.Equals("") && studentInfo.minor.Substring(0, 7).Equals("컴퓨터공학전공"))
+                return true;
+            if (!studentInfo.submajor.Equals("") && studentInfo.submajor.Substring(0, 7).Equals("컴퓨터공학전공"))
+                return true;
+            return false;
+        }
         private void initStudentInfo()
         {
             studentInfo = new Student
@@ -87,57 +105,62 @@ namespace DES3560
                 studentId = pdfText.Substring(pdfText.IndexOf("학번: ") + 4, 10),
                 name = extractName(),
                 major = extractMajor(),
-                submajor = extractSubmajor() == "" ? false : true,
+                minor = extractMinor(),
+                submajor = extractSubmajor(),
+                isEngineering = parseEngineering(),
+
+                formalUniv = extractFormalUniv(),
+                prevMajor = extractPrevMajor(),
+                campusTransfer = extractCampusTransfer(),
+
                 rgcList = parseRGC(),
                 priList = parsePRI(),
                 cseList = parseCSE(),
                 desList = parseDES(),
-                isEngineering = parseEngineering(),
             };
         }
         private string extractName()
         {
             string nameString = pdfText.Substring(pdfText.IndexOf("성명: ") + 4);
-            int index = 0;
-            foreach (char c in nameString)
-            {
-                if (!c.Equals(' '))
-                    index = index + 1;
-                else
-                    break;
-            }
-            return nameString.Substring(0, index);
+            return nameString.Substring(0, getSpaceIndex(nameString, 0));
         }
         private string extractMajor()
         {
             string majorString = pdfText.Substring(pdfText.IndexOf("학과 : ") + 5);
-            int index = 0;
-            foreach (char c in majorString)
-            {
-                if (!c.Equals(' '))
-                    index = index + 1;
-                else break;
-            }
-            return majorString.Substring(0, index);
+            return majorString.Substring(0, getSpaceIndex(majorString, 0));
+        }
+        private string extractMinor()
+        {
+            string minorString = pdfText.Substring(pdfText.IndexOf("부전공1: ") + 6);
+            if (minorString.Substring(0, 4) == "부전공2")
+                return String.Empty;
+            return minorString.Substring(0, getSpaceIndex(minorString, 0));
         }
         private string extractSubmajor()
         {
             string submajorString = pdfText.Substring(pdfText.IndexOf("복수1: ") + 5);
-            if (submajorString.Substring(0, 7) == "컴퓨터공학전공")
-                return "컴퓨터공학전공";
-            return String.Empty;
+            if (submajorString.Substring(0, 3) == "복수2")
+                return String.Empty;
+            return submajorString.Substring(0, getSpaceIndex(submajorString, 0));
         }
-        private bool checkClassification()
+        private string extractFormalUniv()
         {
-            if (pdfText.Substring(0, 13).Equals("취득교과목 영역별 분류표"))
-                return true;
-            return false;
+            string formalUnivString = pdfText.Substring(pdfText.IndexOf("전적대:") + 4);
+            return formalUnivString.Substring(0, getSpaceIndex(formalUnivString, 0));
         }
-        private bool checkMajor()
+        private string extractPrevMajor()
         {
-            if (studentInfo.major.Equals("컴퓨터공학전공") || studentInfo.submajor.Equals(true))
-                return true;
-            return false;
+            string prevMajorString = pdfText.Substring(pdfText.IndexOf("전과(학과):") + 7);
+            if (prevMajorString.Substring(0, 1).Equals("\n"))
+                return String.Empty;
+            return prevMajorString.Substring(0, getNewLineIndex(prevMajorString, 0));
+        }
+        private string extractCampusTransfer()
+        {
+            string campusTransferString = pdfText.Substring(pdfText.IndexOf("캠퍼스전입여부:") + 8);
+            if (campusTransferString.Substring(0, 1).Equals("N"))
+                return "N";
+            return campusTransferString.Substring(0, 4);
         }
         private List<Subject> parseRGC()
         {
@@ -247,13 +270,20 @@ namespace DES3560
         }
         private bool parseEngineering()
         {
-            string engineeringString = pdfText.Substring(pdfText.IndexOf("공학인증심화대상: ") + 9, 1);
+            string engineeringString = pdfText.Substring(pdfText.IndexOf("공학인증심화대상:") + 9, 1);
             return engineeringString == "Y" ? true : false;
         }
         private int getSpaceIndex(string text, int index)
         {
             int i = 0;
             while (!text[index + i].Equals(' '))
+                i = i + 1;
+            return index + i;
+        }
+        private int getNewLineIndex(string text, int index)
+        {
+            int i = 0;
+            while (!text[index + i].Equals('\n'))
                 i = i + 1;
             return index + i;
         }
@@ -267,18 +297,25 @@ namespace DES3560
         private void analysis()
         {
             analysisStudentInfo();
-            analysisRGC();
-            analysisBasic();
-            analysisMSC();
-            analysisMajor();
-            analysisStandard();
+            //analysisRGC();
+            //analysisBasic();
+            //analysisMSC();
+            //analysisMajor();
+            //analysisStandard();
         }
         private void analysisStudentInfo()
         {
             lblMyName.Text = studentInfo.name;
             lblMyStudentId.Text = studentInfo.studentId;
-            lblMyClass.Text = studentInfo.studentClass;
-            //lblMySubMajor.Text = studentInfo.submajor == false ? "x" : "o";
+            lblMyClass.Text = studentInfo.studentClass.Substring(0, 1);
+            lblMyMajor2.Text = studentInfo.major;
+            lblMyCurriYear.Text = studentInfo.curriculumYear.ToString();
+            lblMyIsEngineering.Text = studentInfo.isEngineering == true ? "Y" : "N";
+            lblMyMinor.Text = studentInfo.minor == "" ? "X" : studentInfo.minor;
+            lblMySubmajor.Text = studentInfo.submajor == "" ? "X" : studentInfo.submajor;
+            lblMyCampusTransfer.Text = studentInfo.campusTransfer;
+            lblMyFormalUniv.Text = studentInfo.formalUniv == "" ? "X" : studentInfo.formalUniv;
+            lblMyPrevMajor.Text = studentInfo.prevMajor == "" ? "X" : studentInfo.prevMajor;
         }
         private void analysisBasic()
         {

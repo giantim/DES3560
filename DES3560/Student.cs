@@ -8,13 +8,18 @@ namespace DES3560
 {
     public class Student
     {
-        public int curriculumYear;
-        public string studentClass;
-        public string studentId;
+        public int curriculumYear; // 교육과정 적용년도
+        public string studentClass; // 학년
+        public string studentId; // 학번
         public string name;
-        public string major;
-        public bool submajor;
-        public bool isEngineering;
+        public string major; // 학과
+        public string minor; // 부전공
+        public string submajor; // 복수전공
+        public bool isEngineering; // 공학인증 심화대상
+
+        public string formalUniv; // 전적대
+        public string prevMajor; // 전과(학과)
+        public string campusTransfer; // 캠퍼스 전입여부
 
         public List<Subject> rgcList;
         public List<Subject> priList;

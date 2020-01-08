@@ -59,6 +59,11 @@
             this.lblMyBasic = new System.Windows.Forms.Label();
             this.lblMyMath = new System.Windows.Forms.Label();
             this.lblMyScience = new System.Windows.Forms.Label();
+            this.lblIsPass = new System.Windows.Forms.Label();
+            this.lblRGCPass = new System.Windows.Forms.Label();
+            this.lblIsBasicPass = new System.Windows.Forms.Label();
+            this.lblIsMSCPass = new System.Windows.Forms.Label();
+            this.lblIsMajorPass = new System.Windows.Forms.Label();
             this.tableStandard = new System.Windows.Forms.TableLayoutPanel();
             this.lblMyGraduate = new System.Windows.Forms.Label();
             this.lblGraduate = new System.Windows.Forms.Label();
@@ -89,14 +94,21 @@
             this.lblMyCurriYear = new System.Windows.Forms.Label();
             this.lblIsEngineering = new System.Windows.Forms.Label();
             this.lblMyIsEngineering = new System.Windows.Forms.Label();
-            this.lblIsPass = new System.Windows.Forms.Label();
-            this.lblRGCPass = new System.Windows.Forms.Label();
-            this.lblIsBasicPass = new System.Windows.Forms.Label();
-            this.lblIsMSCPass = new System.Windows.Forms.Label();
-            this.lblIsMajorPass = new System.Windows.Forms.Label();
+            this.tableStudentInfoException = new System.Windows.Forms.TableLayoutPanel();
+            this.lblMinor = new System.Windows.Forms.Label();
+            this.lblMyMinor = new System.Windows.Forms.Label();
+            this.lblSubmajor = new System.Windows.Forms.Label();
+            this.lblMySubmajor = new System.Windows.Forms.Label();
+            this.lblCampusTransfer = new System.Windows.Forms.Label();
+            this.lblMyCampusTransfer = new System.Windows.Forms.Label();
+            this.lblFormalUniv = new System.Windows.Forms.Label();
+            this.lblMyFormalUniv = new System.Windows.Forms.Label();
+            this.lblPrevMajor = new System.Windows.Forms.Label();
+            this.lblMyPrevMajor = new System.Windows.Forms.Label();
             this.tableSubject.SuspendLayout();
             this.tableStandard.SuspendLayout();
             this.tableStudentInfo.SuspendLayout();
+            this.tableStudentInfoException.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnDialog
@@ -115,7 +127,7 @@
             this.txtFileName.Location = new System.Drawing.Point(40, 99);
             this.txtFileName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtFileName.Name = "txtFileName";
-            this.txtFileName.Size = new System.Drawing.Size(222, 25);
+            this.txtFileName.Size = new System.Drawing.Size(222, 21);
             this.txtFileName.TabIndex = 1;
             // 
             // btnExecution
@@ -135,7 +147,7 @@
             this.lblInfo1.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblInfo1.Location = new System.Drawing.Point(38, 34);
             this.lblInfo1.Name = "lblInfo1";
-            this.lblInfo1.Size = new System.Drawing.Size(332, 15);
+            this.lblInfo1.Size = new System.Drawing.Size(276, 12);
             this.lblInfo1.TabIndex = 3;
             this.lblInfo1.Text = "* 취득분류표는 uDrims > 학사정보 > 졸업 >\r\n";
             // 
@@ -145,7 +157,7 @@
             this.lblInfo2.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblInfo2.Location = new System.Drawing.Point(51, 61);
             this.lblInfo2.Name = "lblInfo2";
-            this.lblInfo2.Size = new System.Drawing.Size(585, 15);
+            this.lblInfo2.Size = new System.Drawing.Size(476, 12);
             this.lblInfo2.TabIndex = 4;
             this.lblInfo2.Text = "취득학점확인서조회(전학년) > 출력포함 - 수강신청포함 체크후 출력 하십시오.";
             // 
@@ -189,7 +201,7 @@
             this.tableSubject.Controls.Add(this.lblIsBasicPass, 7, 2);
             this.tableSubject.Controls.Add(this.lblIsMSCPass, 7, 3);
             this.tableSubject.Controls.Add(this.lblIsMajorPass, 7, 5);
-            this.tableSubject.Location = new System.Drawing.Point(41, 221);
+            this.tableSubject.Location = new System.Drawing.Point(40, 456);
             this.tableSubject.Name = "tableSubject";
             this.tableSubject.RowCount = 7;
             this.tableSubject.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
@@ -491,6 +503,68 @@
             this.lblMyScience.Text = "/ 16";
             this.lblMyScience.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lblIsPass
+            // 
+            this.lblIsPass.AutoSize = true;
+            this.lblIsPass.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblIsPass.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblIsPass.Location = new System.Drawing.Point(403, 0);
+            this.lblIsPass.Name = "lblIsPass";
+            this.lblIsPass.Size = new System.Drawing.Size(44, 40);
+            this.lblIsPass.TabIndex = 42;
+            this.lblIsPass.Text = "P/F";
+            this.lblIsPass.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblRGCPass
+            // 
+            this.lblRGCPass.AutoSize = true;
+            this.lblRGCPass.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblRGCPass.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblRGCPass.Location = new System.Drawing.Point(403, 40);
+            this.lblRGCPass.Name = "lblRGCPass";
+            this.lblRGCPass.Size = new System.Drawing.Size(44, 50);
+            this.lblRGCPass.TabIndex = 43;
+            this.lblRGCPass.Text = "P";
+            this.lblRGCPass.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblIsBasicPass
+            // 
+            this.lblIsBasicPass.AutoSize = true;
+            this.lblIsBasicPass.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblIsBasicPass.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblIsBasicPass.Location = new System.Drawing.Point(403, 90);
+            this.lblIsBasicPass.Name = "lblIsBasicPass";
+            this.lblIsBasicPass.Size = new System.Drawing.Size(44, 50);
+            this.lblIsBasicPass.TabIndex = 44;
+            this.lblIsBasicPass.Text = "P";
+            this.lblIsBasicPass.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblIsMSCPass
+            // 
+            this.lblIsMSCPass.AutoSize = true;
+            this.lblIsMSCPass.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblIsMSCPass.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblIsMSCPass.Location = new System.Drawing.Point(403, 140);
+            this.lblIsMSCPass.Name = "lblIsMSCPass";
+            this.tableSubject.SetRowSpan(this.lblIsMSCPass, 2);
+            this.lblIsMSCPass.Size = new System.Drawing.Size(44, 70);
+            this.lblIsMSCPass.TabIndex = 45;
+            this.lblIsMSCPass.Text = "P";
+            this.lblIsMSCPass.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblIsMajorPass
+            // 
+            this.lblIsMajorPass.AutoSize = true;
+            this.lblIsMajorPass.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblIsMajorPass.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblIsMajorPass.Location = new System.Drawing.Point(403, 210);
+            this.lblIsMajorPass.Name = "lblIsMajorPass";
+            this.tableSubject.SetRowSpan(this.lblIsMajorPass, 2);
+            this.lblIsMajorPass.Size = new System.Drawing.Size(44, 76);
+            this.lblIsMajorPass.TabIndex = 46;
+            this.lblIsMajorPass.Text = "P";
+            this.lblIsMajorPass.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // tableStandard
             // 
             this.tableStandard.ColumnCount = 6;
@@ -516,7 +590,7 @@
             this.tableStandard.Controls.Add(this.lblMyAllGrade, 3, 0);
             this.tableStandard.Controls.Add(this.lblMyGPA, 3, 1);
             this.tableStandard.Controls.Add(this.lblMyPaper, 3, 2);
-            this.tableStandard.Location = new System.Drawing.Point(40, 513);
+            this.tableStandard.Location = new System.Drawing.Point(41, 748);
             this.tableStandard.Name = "tableStandard";
             this.tableStandard.RowCount = 3;
             this.tableStandard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
@@ -813,6 +887,7 @@
             // 
             this.lblMyClass.AutoSize = true;
             this.lblMyClass.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblMyClass.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblMyClass.Location = new System.Drawing.Point(413, 0);
             this.lblMyClass.Name = "lblMyClass";
             this.lblMyClass.Size = new System.Drawing.Size(44, 41);
@@ -894,72 +969,176 @@
             this.lblMyIsEngineering.Text = "Y / N";
             this.lblMyIsEngineering.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblIsPass
+            // tableStudentInfoException
             // 
-            this.lblIsPass.AutoSize = true;
-            this.lblIsPass.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblIsPass.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblIsPass.Location = new System.Drawing.Point(403, 0);
-            this.lblIsPass.Name = "lblIsPass";
-            this.lblIsPass.Size = new System.Drawing.Size(44, 40);
-            this.lblIsPass.TabIndex = 42;
-            this.lblIsPass.Text = "P/F";
-            this.lblIsPass.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.tableStudentInfoException.ColumnCount = 8;
+            this.tableStudentInfoException.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableStudentInfoException.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tableStudentInfoException.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableStudentInfoException.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableStudentInfoException.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableStudentInfoException.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tableStudentInfoException.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableStudentInfoException.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableStudentInfoException.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableStudentInfoException.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableStudentInfoException.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableStudentInfoException.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableStudentInfoException.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableStudentInfoException.Controls.Add(this.lblMinor, 0, 0);
+            this.tableStudentInfoException.Controls.Add(this.lblMyMinor, 2, 0);
+            this.tableStudentInfoException.Controls.Add(this.lblSubmajor, 4, 0);
+            this.tableStudentInfoException.Controls.Add(this.lblMySubmajor, 6, 0);
+            this.tableStudentInfoException.Controls.Add(this.lblCampusTransfer, 0, 1);
+            this.tableStudentInfoException.Controls.Add(this.lblMyCampusTransfer, 2, 1);
+            this.tableStudentInfoException.Controls.Add(this.lblFormalUniv, 4, 1);
+            this.tableStudentInfoException.Controls.Add(this.lblMyFormalUniv, 6, 1);
+            this.tableStudentInfoException.Controls.Add(this.lblPrevMajor, 0, 2);
+            this.tableStudentInfoException.Controls.Add(this.lblMyPrevMajor, 2, 2);
+            this.tableStudentInfoException.Location = new System.Drawing.Point(41, 221);
+            this.tableStudentInfoException.Name = "tableStudentInfoException";
+            this.tableStudentInfoException.RowCount = 3;
+            this.tableStudentInfoException.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableStudentInfoException.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableStudentInfoException.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableStudentInfoException.Size = new System.Drawing.Size(811, 150);
+            this.tableStudentInfoException.TabIndex = 8;
             // 
-            // lblRGCPass
+            // lblMinor
             // 
-            this.lblRGCPass.AutoSize = true;
-            this.lblRGCPass.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblRGCPass.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblRGCPass.Location = new System.Drawing.Point(403, 40);
-            this.lblRGCPass.Name = "lblRGCPass";
-            this.lblRGCPass.Size = new System.Drawing.Size(44, 50);
-            this.lblRGCPass.TabIndex = 43;
-            this.lblRGCPass.Text = "P";
-            this.lblRGCPass.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblMinor.AutoSize = true;
+            this.tableStudentInfoException.SetColumnSpan(this.lblMinor, 2);
+            this.lblMinor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblMinor.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblMinor.Location = new System.Drawing.Point(3, 0);
+            this.lblMinor.Name = "lblMinor";
+            this.lblMinor.Size = new System.Drawing.Size(134, 50);
+            this.lblMinor.TabIndex = 0;
+            this.lblMinor.Text = "부전공";
+            this.lblMinor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblIsBasicPass
+            // lblMyMinor
             // 
-            this.lblIsBasicPass.AutoSize = true;
-            this.lblIsBasicPass.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblIsBasicPass.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblIsBasicPass.Location = new System.Drawing.Point(403, 90);
-            this.lblIsBasicPass.Name = "lblIsBasicPass";
-            this.lblIsBasicPass.Size = new System.Drawing.Size(44, 50);
-            this.lblIsBasicPass.TabIndex = 44;
-            this.lblIsBasicPass.Text = "P";
-            this.lblIsBasicPass.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblMyMinor.AutoSize = true;
+            this.tableStudentInfoException.SetColumnSpan(this.lblMyMinor, 2);
+            this.lblMyMinor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblMyMinor.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblMyMinor.Location = new System.Drawing.Point(143, 0);
+            this.lblMyMinor.Name = "lblMyMinor";
+            this.lblMyMinor.Size = new System.Drawing.Size(204, 50);
+            this.lblMyMinor.TabIndex = 1;
+            this.lblMyMinor.Text = "컴퓨터공학전공(2017)";
+            this.lblMyMinor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblIsMSCPass
+            // lblSubmajor
             // 
-            this.lblIsMSCPass.AutoSize = true;
-            this.lblIsMSCPass.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblIsMSCPass.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblIsMSCPass.Location = new System.Drawing.Point(403, 140);
-            this.lblIsMSCPass.Name = "lblIsMSCPass";
-            this.tableSubject.SetRowSpan(this.lblIsMSCPass, 2);
-            this.lblIsMSCPass.Size = new System.Drawing.Size(44, 70);
-            this.lblIsMSCPass.TabIndex = 45;
-            this.lblIsMSCPass.Text = "P";
-            this.lblIsMSCPass.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblSubmajor.AutoSize = true;
+            this.tableStudentInfoException.SetColumnSpan(this.lblSubmajor, 2);
+            this.lblSubmajor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblSubmajor.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblSubmajor.Location = new System.Drawing.Point(353, 0);
+            this.lblSubmajor.Name = "lblSubmajor";
+            this.lblSubmajor.Size = new System.Drawing.Size(134, 50);
+            this.lblSubmajor.TabIndex = 2;
+            this.lblSubmajor.Text = "복수전공";
+            this.lblSubmajor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblIsMajorPass
+            // lblMySubmajor
             // 
-            this.lblIsMajorPass.AutoSize = true;
-            this.lblIsMajorPass.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblIsMajorPass.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblIsMajorPass.Location = new System.Drawing.Point(403, 210);
-            this.lblIsMajorPass.Name = "lblIsMajorPass";
-            this.tableSubject.SetRowSpan(this.lblIsMajorPass, 2);
-            this.lblIsMajorPass.Size = new System.Drawing.Size(44, 76);
-            this.lblIsMajorPass.TabIndex = 46;
-            this.lblIsMajorPass.Text = "P";
-            this.lblIsMajorPass.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblMySubmajor.AutoSize = true;
+            this.tableStudentInfoException.SetColumnSpan(this.lblMySubmajor, 2);
+            this.lblMySubmajor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblMySubmajor.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblMySubmajor.Location = new System.Drawing.Point(493, 0);
+            this.lblMySubmajor.Name = "lblMySubmajor";
+            this.lblMySubmajor.Size = new System.Drawing.Size(315, 50);
+            this.lblMySubmajor.TabIndex = 3;
+            this.lblMySubmajor.Text = "컴퓨터공학전공(2017)";
+            this.lblMySubmajor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblCampusTransfer
+            // 
+            this.lblCampusTransfer.AutoSize = true;
+            this.tableStudentInfoException.SetColumnSpan(this.lblCampusTransfer, 2);
+            this.lblCampusTransfer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblCampusTransfer.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblCampusTransfer.Location = new System.Drawing.Point(3, 50);
+            this.lblCampusTransfer.Name = "lblCampusTransfer";
+            this.lblCampusTransfer.Size = new System.Drawing.Size(134, 50);
+            this.lblCampusTransfer.TabIndex = 4;
+            this.lblCampusTransfer.Text = "캠퍼스 전입여부";
+            this.lblCampusTransfer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblMyCampusTransfer
+            // 
+            this.lblMyCampusTransfer.AutoSize = true;
+            this.tableStudentInfoException.SetColumnSpan(this.lblMyCampusTransfer, 2);
+            this.lblMyCampusTransfer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblMyCampusTransfer.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblMyCampusTransfer.Location = new System.Drawing.Point(143, 50);
+            this.lblMyCampusTransfer.Name = "lblMyCampusTransfer";
+            this.lblMyCampusTransfer.Size = new System.Drawing.Size(204, 50);
+            this.lblMyCampusTransfer.TabIndex = 5;
+            this.lblMyCampusTransfer.Text = "N / Y";
+            this.lblMyCampusTransfer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblFormalUniv
+            // 
+            this.lblFormalUniv.AutoSize = true;
+            this.tableStudentInfoException.SetColumnSpan(this.lblFormalUniv, 2);
+            this.lblFormalUniv.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblFormalUniv.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblFormalUniv.Location = new System.Drawing.Point(353, 50);
+            this.lblFormalUniv.Name = "lblFormalUniv";
+            this.lblFormalUniv.Size = new System.Drawing.Size(134, 50);
+            this.lblFormalUniv.TabIndex = 6;
+            this.lblFormalUniv.Text = "전적대";
+            this.lblFormalUniv.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblMyFormalUniv
+            // 
+            this.lblMyFormalUniv.AutoSize = true;
+            this.tableStudentInfoException.SetColumnSpan(this.lblMyFormalUniv, 2);
+            this.lblMyFormalUniv.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblMyFormalUniv.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblMyFormalUniv.Location = new System.Drawing.Point(493, 50);
+            this.lblMyFormalUniv.Name = "lblMyFormalUniv";
+            this.lblMyFormalUniv.Size = new System.Drawing.Size(315, 50);
+            this.lblMyFormalUniv.TabIndex = 7;
+            this.lblMyFormalUniv.Text = "학점은행제";
+            this.lblMyFormalUniv.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblPrevMajor
+            // 
+            this.lblPrevMajor.AutoSize = true;
+            this.tableStudentInfoException.SetColumnSpan(this.lblPrevMajor, 2);
+            this.lblPrevMajor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblPrevMajor.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblPrevMajor.Location = new System.Drawing.Point(3, 100);
+            this.lblPrevMajor.Name = "lblPrevMajor";
+            this.lblPrevMajor.Size = new System.Drawing.Size(134, 50);
+            this.lblPrevMajor.TabIndex = 8;
+            this.lblPrevMajor.Text = "전과(학과)";
+            this.lblPrevMajor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblMyPrevMajor
+            // 
+            this.lblMyPrevMajor.AutoSize = true;
+            this.tableStudentInfoException.SetColumnSpan(this.lblMyPrevMajor, 6);
+            this.lblMyPrevMajor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblMyPrevMajor.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblMyPrevMajor.Location = new System.Drawing.Point(143, 100);
+            this.lblMyPrevMajor.Name = "lblMyPrevMajor";
+            this.lblMyPrevMajor.Size = new System.Drawing.Size(665, 50);
+            this.lblMyPrevMajor.TabIndex = 9;
+            this.lblMyPrevMajor.Text = "정치행정학부 북한학전공 -> 컴퓨터정보통신공학부 컴퓨터공학전공";
+            this.lblMyPrevMajor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1137, 677);
+            this.ClientSize = new System.Drawing.Size(1154, 911);
+            this.Controls.Add(this.tableStudentInfoException);
             this.Controls.Add(this.tableStudentInfo);
             this.Controls.Add(this.tableStandard);
             this.Controls.Add(this.tableSubject);
@@ -981,6 +1160,8 @@
             this.tableStandard.PerformLayout();
             this.tableStudentInfo.ResumeLayout(false);
             this.tableStudentInfo.PerformLayout();
+            this.tableStudentInfoException.ResumeLayout(false);
+            this.tableStudentInfoException.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1053,6 +1234,17 @@
         private System.Windows.Forms.Label lblIsBasicPass;
         private System.Windows.Forms.Label lblIsMSCPass;
         private System.Windows.Forms.Label lblIsMajorPass;
+        private System.Windows.Forms.TableLayoutPanel tableStudentInfoException;
+        private System.Windows.Forms.Label lblMinor;
+        private System.Windows.Forms.Label lblMyMinor;
+        private System.Windows.Forms.Label lblSubmajor;
+        private System.Windows.Forms.Label lblMySubmajor;
+        private System.Windows.Forms.Label lblCampusTransfer;
+        private System.Windows.Forms.Label lblMyCampusTransfer;
+        private System.Windows.Forms.Label lblFormalUniv;
+        private System.Windows.Forms.Label lblMyFormalUniv;
+        private System.Windows.Forms.Label lblPrevMajor;
+        private System.Windows.Forms.Label lblMyPrevMajor;
     }
 }
 
