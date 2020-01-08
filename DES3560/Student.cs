@@ -14,6 +14,7 @@ namespace DES3560
         public string name;
         public string major;
         public bool submajor;
+        public bool isEngineering;
 
         public List<Subject> rgcList;
         public List<Subject> priList;

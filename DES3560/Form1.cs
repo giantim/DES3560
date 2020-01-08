@@ -16,7 +16,7 @@ using DES3560.Curriculum.Major;
 
 namespace DES3560
 {
-    public partial class Form1 : Form
+    public partial class form1 : Form
     {
         public string filePath;
         public string pdfText;
@@ -32,7 +32,7 @@ namespace DES3560
         public int subEngSum;
 
         #region Functions
-        public Form1()
+        public form1()
         {
             InitializeComponent();
             txtFileName.Enabled = false;
@@ -92,6 +92,7 @@ namespace DES3560
                 priList = parsePRI(),
                 cseList = parseCSE(),
                 desList = parseDES(),
+                isEngineering = parseEngineering(),
             };
         }
         private string extractName()
@@ -208,7 +209,7 @@ namespace DES3560
                     subjectGrade = subjectGrade,
                     subjectCategory = subjectCategory,
                 });
-                temp = temp.Substring(temp.IndexOf(subjectName));
+                temp = temp.Substring(temp.IndexOf(subjectID) + 8);
             }
             if (temp.Contains("CIC4003"))
             {
@@ -244,6 +245,11 @@ namespace DES3560
             }
             return desList;
         }
+        private bool parseEngineering()
+        {
+            string engineeringString = pdfText.Substring(pdfText.IndexOf("공학인증심화대상: ") + 9, 1);
+            return engineeringString == "Y" ? true : false;
+        }
         private int getSpaceIndex(string text, int index)
         {
             int i = 0;
@@ -272,7 +278,7 @@ namespace DES3560
             lblMyName.Text = studentInfo.name;
             lblMyStudentId.Text = studentInfo.studentId;
             lblMyClass.Text = studentInfo.studentClass;
-            lblMySubMajor.Text = studentInfo.submajor == false ? "x" : "o";
+            //lblMySubMajor.Text = studentInfo.submajor == false ? "x" : "o";
         }
         private void analysisBasic()
         {
