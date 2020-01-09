@@ -44,6 +44,9 @@ namespace DES3560
             tableSubject.Visible = false;
             tableStandard.Visible = false;
             tableStudentInfoException.Visible = false;
+            tableHeader.Visible = false;
+            tableRGC.Visible = false;
+            tableBasic.Visible = false;
         }
         private void turnOnTable()
         {
@@ -51,6 +54,9 @@ namespace DES3560
             tableSubject.Visible = true;
             tableStandard.Visible = true;
             tableStudentInfoException.Visible = true;
+            tableHeader.Visible = true;
+            tableRGC.Visible = true;
+            tableBasic.Visible = true;
         }
         private bool extractTextFromPdf()
         {
@@ -179,7 +185,7 @@ namespace DES3560
                     subjectID = subjectID,
                     subjectName = subjectName,
                     subjectGrade = subjectGrade,
-                    subjectCategory = "",
+                    subjectCategory = String.Empty,
                 });
                 temp = temp.Substring(temp.IndexOf(subjectName));
             }
@@ -202,9 +208,20 @@ namespace DES3560
                     subjectID = subjectID,
                     subjectName = subjectName,
                     subjectGrade = subjectGrade,
-                    subjectCategory = "",
+                    subjectCategory = String.Empty,
                 });
                 temp = temp.Substring(temp.IndexOf(subjectName));
+            }
+            if (pdfText.Contains("DEV1042") || pdfText.Contains("EGC7026"))
+            {
+                string subjectID = pdfText.Contains("DEV1042") ? "DEV1042" : "EGC7026";
+                priList.Add(new Subject
+                {
+                    subjectID = subjectID,
+                    subjectName = "기술창조와특허",
+                    subjectGrade = 3,
+                    subjectCategory = String.Empty,
+                });   
             }
             return priList;
         }
@@ -297,8 +314,8 @@ namespace DES3560
         private void analysis()
         {
             analysisStudentInfo();
-            //analysisRGC();
-            //analysisBasic();
+            analysisRGC();
+            analysisBasic();
             //analysisMSC();
             //analysisMajor();
             //analysisStandard();
@@ -317,17 +334,55 @@ namespace DES3560
             lblMyFormalUniv.Text = studentInfo.formalUniv == "" ? "X" : studentInfo.formalUniv;
             lblMyPrevMajor.Text = studentInfo.prevMajor == "" ? "X" : studentInfo.prevMajor;
         }
+        private void analysisRGC()
+        {
+            myRGC = new CommonRGC(studentInfo.rgcList);
+            lblMyRGC.Text = myRGC.RGCGrade.ToString();
+            if (studentInfo.curriculumYear <= 2014)
+            {
+                lblRGCStandard.Text = "/ 14";
+                if (myRGC.RGCGrade >= 14)
+                {
+                    lblRGCPass.ForeColor = Color.Blue;
+                    lblRGCPass.Text = "P";
+                }
+                else
+                {
+                    lblRGCPass.ForeColor = Color.Red;
+                    lblRGCPass.Text = "F";
+                }
+            }
+            else
+            {
+                lblRGCStandard.Text = "/ 16";
+                if (myRGC.RGCGrade >= 16)
+                {
+                    lblRGCPass.ForeColor = Color.Blue;
+                    lblRGCPass.Text = "P";
+                }
+                else
+                {
+                    lblRGCPass.ForeColor = Color.Red;
+                    lblRGCPass.Text = "F";
+                }
+            }
+        }
         private void analysisBasic()
         {
             myBasic = new CommonBasic();
             myBasic.checkBasic(studentInfo.priList);
-            lblMyBasic.Text = myBasic.basicGrade.ToString() + " / 9";
+            lblMyBasic.Text = myBasic.basicGrade.ToString();
             txtBasic.Text = String.Join(Environment.NewLine, myBasic.unacquiredList);
-        }
-        private void analysisRGC()
-        {
-            myRGC = new CommonRGC(studentInfo.rgcList);
-            lblMyRGC.Text = myRGC.RGCGrade.ToString() + " / 16";
+            if (myBasic.unacquiredList.Count == 0)
+            {
+                lblBasicPass.ForeColor = Color.Blue;
+                lblBasicPass.Text = "P";
+            }
+            else
+            {
+                lblBasicPass.ForeColor = Color.Red;
+                lblBasicPass.Text = "F";
+            }
         }
         private void analysisMSC()
         {

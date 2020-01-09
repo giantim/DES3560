@@ -36,17 +36,10 @@
             this.lblInfo1 = new System.Windows.Forms.Label();
             this.lblInfo2 = new System.Windows.Forms.Label();
             this.tableSubject = new System.Windows.Forms.TableLayoutPanel();
-            this.lblCategory = new System.Windows.Forms.Label();
-            this.lblUnacquired = new System.Windows.Forms.Label();
-            this.lblRGC = new System.Windows.Forms.Label();
-            this.txtRGC = new System.Windows.Forms.TextBox();
-            this.txtBasic = new System.Windows.Forms.TextBox();
             this.txtMSC = new System.Windows.Forms.TextBox();
             this.txtMajor = new System.Windows.Forms.TextBox();
-            this.lblBasic = new System.Windows.Forms.Label();
             this.lblMSC = new System.Windows.Forms.Label();
             this.lblMajor = new System.Windows.Forms.Label();
-            this.lblGrade = new System.Windows.Forms.Label();
             this.lblMSCMath = new System.Windows.Forms.Label();
             this.lblMSCScience = new System.Windows.Forms.Label();
             this.lblMajorSum = new System.Windows.Forms.Label();
@@ -55,13 +48,8 @@
             this.lblSpecial = new System.Windows.Forms.Label();
             this.lblMyDesign = new System.Windows.Forms.Label();
             this.lblMySpecial = new System.Windows.Forms.Label();
-            this.lblMyRGC = new System.Windows.Forms.Label();
-            this.lblMyBasic = new System.Windows.Forms.Label();
             this.lblMyMath = new System.Windows.Forms.Label();
             this.lblMyScience = new System.Windows.Forms.Label();
-            this.lblIsPass = new System.Windows.Forms.Label();
-            this.lblRGCPass = new System.Windows.Forms.Label();
-            this.lblIsBasicPass = new System.Windows.Forms.Label();
             this.lblIsMSCPass = new System.Windows.Forms.Label();
             this.lblIsMajorPass = new System.Windows.Forms.Label();
             this.tableStandard = new System.Windows.Forms.TableLayoutPanel();
@@ -105,10 +93,30 @@
             this.lblMyFormalUniv = new System.Windows.Forms.Label();
             this.lblPrevMajor = new System.Windows.Forms.Label();
             this.lblMyPrevMajor = new System.Windows.Forms.Label();
+            this.tableHeader = new System.Windows.Forms.TableLayoutPanel();
+            this.lblCategory = new System.Windows.Forms.Label();
+            this.lblGrade = new System.Windows.Forms.Label();
+            this.lblIsPass = new System.Windows.Forms.Label();
+            this.lblUnacquired = new System.Windows.Forms.Label();
+            this.tableRGC = new System.Windows.Forms.TableLayoutPanel();
+            this.tableBasic = new System.Windows.Forms.TableLayoutPanel();
+            this.lblRGC = new System.Windows.Forms.Label();
+            this.lblMyRGC = new System.Windows.Forms.Label();
+            this.lblRGCStandard = new System.Windows.Forms.Label();
+            this.lblRGCPass = new System.Windows.Forms.Label();
+            this.txtRGC = new System.Windows.Forms.TextBox();
+            this.lblBasic = new System.Windows.Forms.Label();
+            this.lblMyBasic = new System.Windows.Forms.Label();
+            this.lblBasicStandard = new System.Windows.Forms.Label();
+            this.lblBasicPass = new System.Windows.Forms.Label();
+            this.txtBasic = new System.Windows.Forms.TextBox();
             this.tableSubject.SuspendLayout();
             this.tableStandard.SuspendLayout();
             this.tableStudentInfo.SuspendLayout();
             this.tableStudentInfoException.SuspendLayout();
+            this.tableHeader.SuspendLayout();
+            this.tableRGC.SuspendLayout();
+            this.tableBasic.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnDialog
@@ -127,7 +135,7 @@
             this.txtFileName.Location = new System.Drawing.Point(40, 99);
             this.txtFileName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtFileName.Name = "txtFileName";
-            this.txtFileName.Size = new System.Drawing.Size(222, 21);
+            this.txtFileName.Size = new System.Drawing.Size(222, 25);
             this.txtFileName.TabIndex = 1;
             // 
             // btnExecution
@@ -147,7 +155,7 @@
             this.lblInfo1.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblInfo1.Location = new System.Drawing.Point(38, 34);
             this.lblInfo1.Name = "lblInfo1";
-            this.lblInfo1.Size = new System.Drawing.Size(276, 12);
+            this.lblInfo1.Size = new System.Drawing.Size(332, 15);
             this.lblInfo1.TabIndex = 3;
             this.lblInfo1.Text = "* 취득분류표는 uDrims > 학사정보 > 졸업 >\r\n";
             // 
@@ -157,9 +165,9 @@
             this.lblInfo2.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblInfo2.Location = new System.Drawing.Point(51, 61);
             this.lblInfo2.Name = "lblInfo2";
-            this.lblInfo2.Size = new System.Drawing.Size(476, 12);
+            this.lblInfo2.Size = new System.Drawing.Size(630, 15);
             this.lblInfo2.TabIndex = 4;
-            this.lblInfo2.Text = "취득학점확인서조회(전학년) > 출력포함 - 수강신청포함 체크후 출력 하십시오.";
+            this.lblInfo2.Text = "취득학점확인서조회(전학년) > 출력포함 - 수강신청포함 체크후 pdf로 출력 하십시오.";
             // 
             // tableSubject
             // 
@@ -173,104 +181,33 @@
             this.tableSubject.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableSubject.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableSubject.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableSubject.Controls.Add(this.lblCategory, 0, 0);
-            this.tableSubject.Controls.Add(this.lblUnacquired, 8, 0);
-            this.tableSubject.Controls.Add(this.lblRGC, 0, 1);
-            this.tableSubject.Controls.Add(this.txtRGC, 8, 1);
-            this.tableSubject.Controls.Add(this.txtBasic, 8, 2);
-            this.tableSubject.Controls.Add(this.txtMSC, 8, 3);
-            this.tableSubject.Controls.Add(this.txtMajor, 8, 5);
-            this.tableSubject.Controls.Add(this.lblBasic, 0, 2);
-            this.tableSubject.Controls.Add(this.lblMSC, 0, 3);
-            this.tableSubject.Controls.Add(this.lblMajor, 0, 5);
-            this.tableSubject.Controls.Add(this.lblGrade, 1, 0);
-            this.tableSubject.Controls.Add(this.lblMSCMath, 1, 3);
-            this.tableSubject.Controls.Add(this.lblMSCScience, 4, 3);
-            this.tableSubject.Controls.Add(this.lblMajorSum, 1, 5);
-            this.tableSubject.Controls.Add(this.lblMyMajorSum, 1, 6);
-            this.tableSubject.Controls.Add(this.lblDesign, 3, 5);
-            this.tableSubject.Controls.Add(this.lblSpecial, 5, 5);
-            this.tableSubject.Controls.Add(this.lblMyDesign, 3, 6);
-            this.tableSubject.Controls.Add(this.lblMySpecial, 5, 6);
-            this.tableSubject.Controls.Add(this.lblMyRGC, 1, 1);
-            this.tableSubject.Controls.Add(this.lblMyBasic, 1, 2);
-            this.tableSubject.Controls.Add(this.lblMyMath, 1, 4);
-            this.tableSubject.Controls.Add(this.lblMyScience, 4, 4);
-            this.tableSubject.Controls.Add(this.lblIsPass, 7, 0);
-            this.tableSubject.Controls.Add(this.lblRGCPass, 7, 1);
-            this.tableSubject.Controls.Add(this.lblIsBasicPass, 7, 2);
-            this.tableSubject.Controls.Add(this.lblIsMSCPass, 7, 3);
-            this.tableSubject.Controls.Add(this.lblIsMajorPass, 7, 5);
-            this.tableSubject.Location = new System.Drawing.Point(40, 456);
+            this.tableSubject.Controls.Add(this.txtMSC, 8, 2);
+            this.tableSubject.Controls.Add(this.txtMajor, 8, 4);
+            this.tableSubject.Controls.Add(this.lblMSC, 0, 2);
+            this.tableSubject.Controls.Add(this.lblMajor, 0, 4);
+            this.tableSubject.Controls.Add(this.lblMSCMath, 1, 2);
+            this.tableSubject.Controls.Add(this.lblMSCScience, 4, 2);
+            this.tableSubject.Controls.Add(this.lblMajorSum, 1, 4);
+            this.tableSubject.Controls.Add(this.lblMyMajorSum, 1, 5);
+            this.tableSubject.Controls.Add(this.lblDesign, 3, 4);
+            this.tableSubject.Controls.Add(this.lblSpecial, 5, 4);
+            this.tableSubject.Controls.Add(this.lblMyDesign, 3, 5);
+            this.tableSubject.Controls.Add(this.lblMySpecial, 5, 5);
+            this.tableSubject.Controls.Add(this.lblMyMath, 1, 3);
+            this.tableSubject.Controls.Add(this.lblMyScience, 4, 3);
+            this.tableSubject.Controls.Add(this.lblIsMSCPass, 7, 2);
+            this.tableSubject.Controls.Add(this.lblIsMajorPass, 7, 4);
+            this.tableSubject.Location = new System.Drawing.Point(40, 607);
             this.tableSubject.Name = "tableSubject";
-            this.tableSubject.RowCount = 7;
-            this.tableSubject.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableSubject.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableSubject.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableSubject.RowCount = 6;
+            this.tableSubject.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableSubject.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableSubject.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tableSubject.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tableSubject.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tableSubject.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableSubject.Size = new System.Drawing.Size(1084, 286);
+            this.tableSubject.Size = new System.Drawing.Size(1084, 259);
             this.tableSubject.TabIndex = 5;
-            // 
-            // lblCategory
-            // 
-            this.lblCategory.AutoSize = true;
-            this.lblCategory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblCategory.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblCategory.Location = new System.Drawing.Point(3, 0);
-            this.lblCategory.Name = "lblCategory";
-            this.lblCategory.Size = new System.Drawing.Size(94, 40);
-            this.lblCategory.TabIndex = 0;
-            this.lblCategory.Text = "항목";
-            this.lblCategory.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblUnacquired
-            // 
-            this.lblUnacquired.AutoSize = true;
-            this.lblUnacquired.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblUnacquired.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblUnacquired.Location = new System.Drawing.Point(453, 0);
-            this.lblUnacquired.Name = "lblUnacquired";
-            this.lblUnacquired.Size = new System.Drawing.Size(628, 40);
-            this.lblUnacquired.TabIndex = 2;
-            this.lblUnacquired.Text = "미취득 내역";
-            this.lblUnacquired.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblRGC
-            // 
-            this.lblRGC.AutoSize = true;
-            this.lblRGC.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblRGC.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblRGC.Location = new System.Drawing.Point(3, 40);
-            this.lblRGC.Name = "lblRGC";
-            this.lblRGC.Size = new System.Drawing.Size(94, 50);
-            this.lblRGC.TabIndex = 3;
-            this.lblRGC.Text = "공통교양";
-            this.lblRGC.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // txtRGC
-            // 
-            this.txtRGC.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtRGC.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.txtRGC.Location = new System.Drawing.Point(453, 43);
-            this.txtRGC.Multiline = true;
-            this.txtRGC.Name = "txtRGC";
-            this.txtRGC.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtRGC.Size = new System.Drawing.Size(628, 44);
-            this.txtRGC.TabIndex = 7;
-            // 
-            // txtBasic
-            // 
-            this.txtBasic.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtBasic.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.txtBasic.Location = new System.Drawing.Point(453, 93);
-            this.txtBasic.Multiline = true;
-            this.txtBasic.Name = "txtBasic";
-            this.txtBasic.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtBasic.Size = new System.Drawing.Size(628, 44);
-            this.txtBasic.TabIndex = 8;
             // 
             // txtMSC
             // 
@@ -295,18 +232,6 @@
             this.txtMajor.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtMajor.Size = new System.Drawing.Size(628, 70);
             this.txtMajor.TabIndex = 10;
-            // 
-            // lblBasic
-            // 
-            this.lblBasic.AutoSize = true;
-            this.lblBasic.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblBasic.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblBasic.Location = new System.Drawing.Point(3, 90);
-            this.lblBasic.Name = "lblBasic";
-            this.lblBasic.Size = new System.Drawing.Size(94, 50);
-            this.lblBasic.TabIndex = 11;
-            this.lblBasic.Text = "기본소양";
-            this.lblBasic.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblMSC
             // 
@@ -333,19 +258,6 @@
             this.lblMajor.TabIndex = 16;
             this.lblMajor.Text = "전공필수";
             this.lblMajor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblGrade
-            // 
-            this.lblGrade.AutoSize = true;
-            this.tableSubject.SetColumnSpan(this.lblGrade, 6);
-            this.lblGrade.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblGrade.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblGrade.Location = new System.Drawing.Point(103, 0);
-            this.lblGrade.Name = "lblGrade";
-            this.lblGrade.Size = new System.Drawing.Size(294, 40);
-            this.lblGrade.TabIndex = 17;
-            this.lblGrade.Text = "학점";
-            this.lblGrade.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblMSCMath
             // 
@@ -451,32 +363,6 @@
             this.lblMySpecial.Text = "/ 42";
             this.lblMySpecial.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblMyRGC
-            // 
-            this.lblMyRGC.AutoSize = true;
-            this.tableSubject.SetColumnSpan(this.lblMyRGC, 6);
-            this.lblMyRGC.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblMyRGC.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblMyRGC.Location = new System.Drawing.Point(103, 40);
-            this.lblMyRGC.Name = "lblMyRGC";
-            this.lblMyRGC.Size = new System.Drawing.Size(294, 50);
-            this.lblMyRGC.TabIndex = 38;
-            this.lblMyRGC.Text = "/ 16";
-            this.lblMyRGC.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblMyBasic
-            // 
-            this.lblMyBasic.AutoSize = true;
-            this.tableSubject.SetColumnSpan(this.lblMyBasic, 6);
-            this.lblMyBasic.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblMyBasic.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblMyBasic.Location = new System.Drawing.Point(103, 90);
-            this.lblMyBasic.Name = "lblMyBasic";
-            this.lblMyBasic.Size = new System.Drawing.Size(294, 50);
-            this.lblMyBasic.TabIndex = 39;
-            this.lblMyBasic.Text = "/ 9";
-            this.lblMyBasic.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // lblMyMath
             // 
             this.lblMyMath.AutoSize = true;
@@ -502,42 +388,6 @@
             this.lblMyScience.TabIndex = 41;
             this.lblMyScience.Text = "/ 16";
             this.lblMyScience.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblIsPass
-            // 
-            this.lblIsPass.AutoSize = true;
-            this.lblIsPass.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblIsPass.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblIsPass.Location = new System.Drawing.Point(403, 0);
-            this.lblIsPass.Name = "lblIsPass";
-            this.lblIsPass.Size = new System.Drawing.Size(44, 40);
-            this.lblIsPass.TabIndex = 42;
-            this.lblIsPass.Text = "P/F";
-            this.lblIsPass.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblRGCPass
-            // 
-            this.lblRGCPass.AutoSize = true;
-            this.lblRGCPass.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblRGCPass.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblRGCPass.Location = new System.Drawing.Point(403, 40);
-            this.lblRGCPass.Name = "lblRGCPass";
-            this.lblRGCPass.Size = new System.Drawing.Size(44, 50);
-            this.lblRGCPass.TabIndex = 43;
-            this.lblRGCPass.Text = "P";
-            this.lblRGCPass.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblIsBasicPass
-            // 
-            this.lblIsBasicPass.AutoSize = true;
-            this.lblIsBasicPass.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblIsBasicPass.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblIsBasicPass.Location = new System.Drawing.Point(403, 90);
-            this.lblIsBasicPass.Name = "lblIsBasicPass";
-            this.lblIsBasicPass.Size = new System.Drawing.Size(44, 50);
-            this.lblIsBasicPass.TabIndex = 44;
-            this.lblIsBasicPass.Text = "P";
-            this.lblIsBasicPass.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblIsMSCPass
             // 
@@ -590,7 +440,7 @@
             this.tableStandard.Controls.Add(this.lblMyAllGrade, 3, 0);
             this.tableStandard.Controls.Add(this.lblMyGPA, 3, 1);
             this.tableStandard.Controls.Add(this.lblMyPaper, 3, 2);
-            this.tableStandard.Location = new System.Drawing.Point(41, 748);
+            this.tableStandard.Location = new System.Drawing.Point(41, 892);
             this.tableStandard.Name = "tableStandard";
             this.tableStandard.RowCount = 3;
             this.tableStandard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
@@ -995,7 +845,7 @@
             this.tableStudentInfoException.Controls.Add(this.lblMyFormalUniv, 6, 1);
             this.tableStudentInfoException.Controls.Add(this.lblPrevMajor, 0, 2);
             this.tableStudentInfoException.Controls.Add(this.lblMyPrevMajor, 2, 2);
-            this.tableStudentInfoException.Location = new System.Drawing.Point(41, 221);
+            this.tableStudentInfoException.Location = new System.Drawing.Point(40, 221);
             this.tableStudentInfoException.Name = "tableStudentInfoException";
             this.tableStudentInfoException.RowCount = 3;
             this.tableStudentInfoException.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
@@ -1134,10 +984,239 @@
             this.lblMyPrevMajor.Text = "정치행정학부 북한학전공 -> 컴퓨터정보통신공학부 컴퓨터공학전공";
             this.lblMyPrevMajor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // tableHeader
+            // 
+            this.tableHeader.ColumnCount = 4;
+            this.tableHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 300F));
+            this.tableHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableHeader.Controls.Add(this.lblCategory, 0, 0);
+            this.tableHeader.Controls.Add(this.lblGrade, 1, 0);
+            this.tableHeader.Controls.Add(this.lblIsPass, 2, 0);
+            this.tableHeader.Controls.Add(this.lblUnacquired, 3, 0);
+            this.tableHeader.Location = new System.Drawing.Point(40, 377);
+            this.tableHeader.Name = "tableHeader";
+            this.tableHeader.RowCount = 1;
+            this.tableHeader.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableHeader.Size = new System.Drawing.Size(890, 40);
+            this.tableHeader.TabIndex = 9;
+            // 
+            // lblCategory
+            // 
+            this.lblCategory.AutoSize = true;
+            this.lblCategory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblCategory.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblCategory.Location = new System.Drawing.Point(3, 0);
+            this.lblCategory.Name = "lblCategory";
+            this.lblCategory.Size = new System.Drawing.Size(94, 40);
+            this.lblCategory.TabIndex = 0;
+            this.lblCategory.Text = "항목";
+            this.lblCategory.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblGrade
+            // 
+            this.lblGrade.AutoSize = true;
+            this.lblGrade.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblGrade.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblGrade.Location = new System.Drawing.Point(103, 0);
+            this.lblGrade.Name = "lblGrade";
+            this.lblGrade.Size = new System.Drawing.Size(294, 40);
+            this.lblGrade.TabIndex = 1;
+            this.lblGrade.Text = "학점";
+            this.lblGrade.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblIsPass
+            // 
+            this.lblIsPass.AutoSize = true;
+            this.lblIsPass.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblIsPass.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblIsPass.Location = new System.Drawing.Point(403, 0);
+            this.lblIsPass.Name = "lblIsPass";
+            this.lblIsPass.Size = new System.Drawing.Size(44, 40);
+            this.lblIsPass.TabIndex = 2;
+            this.lblIsPass.Text = "P/F";
+            this.lblIsPass.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblUnacquired
+            // 
+            this.lblUnacquired.AutoSize = true;
+            this.lblUnacquired.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblUnacquired.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblUnacquired.Location = new System.Drawing.Point(453, 0);
+            this.lblUnacquired.Name = "lblUnacquired";
+            this.lblUnacquired.Size = new System.Drawing.Size(437, 40);
+            this.lblUnacquired.TabIndex = 3;
+            this.lblUnacquired.Text = "미취득 내역";
+            this.lblUnacquired.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tableRGC
+            // 
+            this.tableRGC.ColumnCount = 5;
+            this.tableRGC.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableRGC.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableRGC.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableRGC.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableRGC.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableRGC.Controls.Add(this.lblRGC, 0, 0);
+            this.tableRGC.Controls.Add(this.lblMyRGC, 1, 0);
+            this.tableRGC.Controls.Add(this.lblRGCStandard, 2, 0);
+            this.tableRGC.Controls.Add(this.lblRGCPass, 3, 0);
+            this.tableRGC.Controls.Add(this.txtRGC, 4, 0);
+            this.tableRGC.Location = new System.Drawing.Point(40, 420);
+            this.tableRGC.Name = "tableRGC";
+            this.tableRGC.RowCount = 1;
+            this.tableRGC.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableRGC.Size = new System.Drawing.Size(890, 70);
+            this.tableRGC.TabIndex = 10;
+            // 
+            // tableBasic
+            // 
+            this.tableBasic.ColumnCount = 5;
+            this.tableBasic.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableBasic.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableBasic.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableBasic.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableBasic.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableBasic.Controls.Add(this.lblBasic, 0, 0);
+            this.tableBasic.Controls.Add(this.lblMyBasic, 1, 0);
+            this.tableBasic.Controls.Add(this.lblBasicStandard, 2, 0);
+            this.tableBasic.Controls.Add(this.lblBasicPass, 3, 0);
+            this.tableBasic.Controls.Add(this.txtBasic, 4, 0);
+            this.tableBasic.Location = new System.Drawing.Point(40, 493);
+            this.tableBasic.Name = "tableBasic";
+            this.tableBasic.RowCount = 1;
+            this.tableBasic.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableBasic.Size = new System.Drawing.Size(890, 70);
+            this.tableBasic.TabIndex = 11;
+            // 
+            // lblRGC
+            // 
+            this.lblRGC.AutoSize = true;
+            this.lblRGC.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblRGC.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblRGC.Location = new System.Drawing.Point(3, 0);
+            this.lblRGC.Name = "lblRGC";
+            this.lblRGC.Size = new System.Drawing.Size(94, 70);
+            this.lblRGC.TabIndex = 0;
+            this.lblRGC.Text = "공통교양";
+            this.lblRGC.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblMyRGC
+            // 
+            this.lblMyRGC.AutoSize = true;
+            this.lblMyRGC.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblMyRGC.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblMyRGC.Location = new System.Drawing.Point(103, 0);
+            this.lblMyRGC.Name = "lblMyRGC";
+            this.lblMyRGC.Size = new System.Drawing.Size(94, 70);
+            this.lblMyRGC.TabIndex = 1;
+            this.lblMyRGC.Text = "16";
+            this.lblMyRGC.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblRGCStandard
+            // 
+            this.lblRGCStandard.AutoSize = true;
+            this.lblRGCStandard.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblRGCStandard.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblRGCStandard.Location = new System.Drawing.Point(203, 0);
+            this.lblRGCStandard.Name = "lblRGCStandard";
+            this.lblRGCStandard.Size = new System.Drawing.Size(194, 70);
+            this.lblRGCStandard.TabIndex = 2;
+            this.lblRGCStandard.Text = "/ 16";
+            this.lblRGCStandard.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblRGCPass
+            // 
+            this.lblRGCPass.AutoSize = true;
+            this.lblRGCPass.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblRGCPass.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblRGCPass.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblRGCPass.Location = new System.Drawing.Point(403, 0);
+            this.lblRGCPass.Name = "lblRGCPass";
+            this.lblRGCPass.Size = new System.Drawing.Size(44, 70);
+            this.lblRGCPass.TabIndex = 3;
+            this.lblRGCPass.Text = "P";
+            this.lblRGCPass.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // txtRGC
+            // 
+            this.txtRGC.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtRGC.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.txtRGC.Location = new System.Drawing.Point(453, 3);
+            this.txtRGC.Multiline = true;
+            this.txtRGC.Name = "txtRGC";
+            this.txtRGC.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtRGC.Size = new System.Drawing.Size(436, 64);
+            this.txtRGC.TabIndex = 4;
+            // 
+            // lblBasic
+            // 
+            this.lblBasic.AutoSize = true;
+            this.lblBasic.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblBasic.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblBasic.Location = new System.Drawing.Point(3, 0);
+            this.lblBasic.Name = "lblBasic";
+            this.lblBasic.Size = new System.Drawing.Size(94, 70);
+            this.lblBasic.TabIndex = 0;
+            this.lblBasic.Text = "기본소양";
+            this.lblBasic.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblMyBasic
+            // 
+            this.lblMyBasic.AutoSize = true;
+            this.lblMyBasic.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblMyBasic.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblMyBasic.Location = new System.Drawing.Point(103, 0);
+            this.lblMyBasic.Name = "lblMyBasic";
+            this.lblMyBasic.Size = new System.Drawing.Size(94, 70);
+            this.lblMyBasic.TabIndex = 1;
+            this.lblMyBasic.Text = "9";
+            this.lblMyBasic.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblBasicStandard
+            // 
+            this.lblBasicStandard.AutoSize = true;
+            this.lblBasicStandard.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblBasicStandard.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblBasicStandard.Location = new System.Drawing.Point(203, 0);
+            this.lblBasicStandard.Name = "lblBasicStandard";
+            this.lblBasicStandard.Size = new System.Drawing.Size(194, 70);
+            this.lblBasicStandard.TabIndex = 2;
+            this.lblBasicStandard.Text = "/ 9";
+            this.lblBasicStandard.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblBasicPass
+            // 
+            this.lblBasicPass.AutoSize = true;
+            this.lblBasicPass.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblBasicPass.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblBasicPass.Location = new System.Drawing.Point(403, 0);
+            this.lblBasicPass.Name = "lblBasicPass";
+            this.lblBasicPass.Size = new System.Drawing.Size(44, 70);
+            this.lblBasicPass.TabIndex = 3;
+            this.lblBasicPass.Text = "P";
+            this.lblBasicPass.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // txtBasic
+            // 
+            this.txtBasic.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtBasic.Location = new System.Drawing.Point(453, 3);
+            this.txtBasic.Multiline = true;
+            this.txtBasic.Name = "txtBasic";
+            this.txtBasic.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBasic.Size = new System.Drawing.Size(434, 64);
+            this.txtBasic.TabIndex = 4;
+            // 
             // form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1154, 911);
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(1154, 1055);
+            this.Controls.Add(this.tableBasic);
+            this.Controls.Add(this.tableRGC);
+            this.Controls.Add(this.tableHeader);
             this.Controls.Add(this.tableStudentInfoException);
             this.Controls.Add(this.tableStudentInfo);
             this.Controls.Add(this.tableStandard);
@@ -1162,6 +1241,12 @@
             this.tableStudentInfo.PerformLayout();
             this.tableStudentInfoException.ResumeLayout(false);
             this.tableStudentInfoException.PerformLayout();
+            this.tableHeader.ResumeLayout(false);
+            this.tableHeader.PerformLayout();
+            this.tableRGC.ResumeLayout(false);
+            this.tableRGC.PerformLayout();
+            this.tableBasic.ResumeLayout(false);
+            this.tableBasic.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1176,16 +1261,10 @@
         private System.Windows.Forms.Label lblInfo1;
         private System.Windows.Forms.Label lblInfo2;
         private System.Windows.Forms.TableLayoutPanel tableSubject;
-        private System.Windows.Forms.Label lblCategory;
-        private System.Windows.Forms.Label lblRGC;
-        private System.Windows.Forms.TextBox txtRGC;
-        private System.Windows.Forms.TextBox txtBasic;
         private System.Windows.Forms.TextBox txtMSC;
         private System.Windows.Forms.TextBox txtMajor;
-        private System.Windows.Forms.Label lblBasic;
         private System.Windows.Forms.Label lblMSC;
         private System.Windows.Forms.Label lblMajor;
-        private System.Windows.Forms.Label lblGrade;
         private System.Windows.Forms.Label lblMSCMath;
         private System.Windows.Forms.Label lblMSCScience;
         private System.Windows.Forms.Label lblMajorSum;
@@ -1194,8 +1273,6 @@
         private System.Windows.Forms.Label lblSpecial;
         private System.Windows.Forms.Label lblMyDesign;
         private System.Windows.Forms.Label lblMySpecial;
-        private System.Windows.Forms.Label lblMyRGC;
-        private System.Windows.Forms.Label lblMyBasic;
         private System.Windows.Forms.Label lblMyMath;
         private System.Windows.Forms.Label lblMyScience;
         private System.Windows.Forms.TableLayoutPanel tableStandard;
@@ -1228,10 +1305,6 @@
         private System.Windows.Forms.Label lblMyCurriYear;
         private System.Windows.Forms.Label lblIsEngineering;
         private System.Windows.Forms.Label lblMyIsEngineering;
-        private System.Windows.Forms.Label lblUnacquired;
-        private System.Windows.Forms.Label lblIsPass;
-        private System.Windows.Forms.Label lblRGCPass;
-        private System.Windows.Forms.Label lblIsBasicPass;
         private System.Windows.Forms.Label lblIsMSCPass;
         private System.Windows.Forms.Label lblIsMajorPass;
         private System.Windows.Forms.TableLayoutPanel tableStudentInfoException;
@@ -1245,6 +1318,23 @@
         private System.Windows.Forms.Label lblMyFormalUniv;
         private System.Windows.Forms.Label lblPrevMajor;
         private System.Windows.Forms.Label lblMyPrevMajor;
+        private System.Windows.Forms.TableLayoutPanel tableHeader;
+        private System.Windows.Forms.Label lblCategory;
+        private System.Windows.Forms.Label lblGrade;
+        private System.Windows.Forms.Label lblIsPass;
+        private System.Windows.Forms.Label lblUnacquired;
+        private System.Windows.Forms.TableLayoutPanel tableRGC;
+        private System.Windows.Forms.TableLayoutPanel tableBasic;
+        private System.Windows.Forms.Label lblRGC;
+        private System.Windows.Forms.Label lblMyRGC;
+        private System.Windows.Forms.Label lblRGCStandard;
+        private System.Windows.Forms.Label lblRGCPass;
+        private System.Windows.Forms.TextBox txtRGC;
+        private System.Windows.Forms.Label lblBasic;
+        private System.Windows.Forms.Label lblMyBasic;
+        private System.Windows.Forms.Label lblBasicStandard;
+        private System.Windows.Forms.Label lblBasicPass;
+        private System.Windows.Forms.TextBox txtBasic;
     }
 }
 
