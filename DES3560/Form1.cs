@@ -36,27 +36,29 @@ namespace DES3560
         {
             InitializeComponent();
             txtFileName.Enabled = false;
-            turnOffTable();
+            //turnOffTable();
         }
         private void turnOffTable()
         {
             tableStudentInfo.Visible = false;
-            tableSubject.Visible = false;
             tableStandard.Visible = false;
             tableStudentInfoException.Visible = false;
             tableHeader.Visible = false;
             tableRGC.Visible = false;
             tableBasic.Visible = false;
+            tableMSC.Visible = false;
+            tableMajor.Visible = false;
         }
         private void turnOnTable()
         {
             tableStudentInfo.Visible = true;
-            tableSubject.Visible = true;
             tableStandard.Visible = true;
             tableStudentInfoException.Visible = true;
             tableHeader.Visible = true;
             tableRGC.Visible = true;
             tableBasic.Visible = true;
+            tableMSC.Visible = true;
+            tableMajor.Visible = true;
         }
         private bool extractTextFromPdf()
         {
@@ -384,41 +386,41 @@ namespace DES3560
                 lblBasicPass.Text = "F";
             }
         }
-        private void analysisMSC()
-        {
-            myMSC = new CommonMSC(studentInfo.curriculumYear);
-            myMSC.checkMSC(studentInfo.priList);
-            if (studentInfo.curriculumYear < 2017)
-            {
-                lblMyMath.Text = myMSC.mathGrade.ToString();
-                lblMyScience.Text = myMSC.scienceGrade.ToString();
-            }
-            else
-            {
-                lblMyMath.Text = myMSC.mathGrade.ToString() + " / 12";
-                lblMyScience.Text = myMSC.scienceGrade.ToString() + " / 6";
-            }
-            txtMSC.Text = String.Join(Environment.NewLine, myMSC.unacquiredList);
-        }
-        private void analysisMajor()
-        {
-            paperPass = false;
-            myMajor = new MajorByCurri(studentInfo.curriculumYear);
-            myMajor.checkMajor(studentInfo.cseList, studentInfo.desList);
-            if (studentInfo.submajor.Equals(false))
-            {
-                lblMyMajorSum.Text = myMajor.allGrade.ToString() + " / 84";
-                lblMySpecial.Text = myMajor.specialGrade.ToString() + " / 52";
-            }
-            else
-            {
-                lblMyMajorSum.Text = myMajor.allGrade.ToString() + " / 51";
-                lblMySpecial.Text = myMajor.specialGrade.ToString() + " / 26";
-            }
-            lblMyDesign.Text = myMajor.designGrade.ToString() + " / 12";
-            txtMajor.Text = String.Join(Environment.NewLine, myMajor.unacquiredList);
-            analysisPaper(myMajor.unacquiredList);
-        }
+        //private void analysisMSC()
+        //{
+        //    myMSC = new CommonMSC(studentInfo.curriculumYear);
+        //    myMSC.checkMSC(studentInfo.priList);
+        //    if (studentInfo.curriculumYear < 2017)
+        //    {
+        //        lblMyMath.Text = myMSC.mathGrade.ToString();
+        //        lblMyScience.Text = myMSC.scienceGrade.ToString();
+        //    }
+        //    else
+        //    {
+        //        lblMyMath.Text = myMSC.mathGrade.ToString() + " / 12";
+        //        lblMyScience.Text = myMSC.scienceGrade.ToString() + " / 6";
+        //    }
+        //    txtMSC.Text = String.Join(Environment.NewLine, myMSC.unacquiredList);
+        //}
+        //private void analysisMajor()
+        //{
+        //    paperPass = false;
+        //    myMajor = new MajorByCurri(studentInfo.curriculumYear);
+        //    myMajor.checkMajor(studentInfo.cseList, studentInfo.desList);
+        //    if (studentInfo.submajor.Equals(false))
+        //    {
+        //        lblMyMajorSum.Text = myMajor.allGrade.ToString() + " / 84";
+        //        lblMySpecial.Text = myMajor.specialGrade.ToString() + " / 52";
+        //    }
+        //    else
+        //    {
+        //        lblMyMajorSum.Text = myMajor.allGrade.ToString() + " / 51";
+        //        lblMySpecial.Text = myMajor.specialGrade.ToString() + " / 26";
+        //    }
+        //    lblMyDesign.Text = myMajor.designGrade.ToString() + " / 12";
+        //    txtMSC.Text = String.Join(Environment.NewLine, myMajor.unacquiredList);
+        //    analysisPaper(myMajor.unacquiredList);
+        //}
         private void analysisPaper(List<string> list)
         {
             paperPass = false;
