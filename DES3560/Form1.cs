@@ -36,7 +36,7 @@ namespace DES3560
         {
             InitializeComponent();
             txtFileName.Enabled = false;
-            //turnOffTable();
+            turnOffTable();
         }
         private void turnOffTable()
         {
@@ -318,7 +318,7 @@ namespace DES3560
             analysisStudentInfo();
             analysisRGC();
             analysisBasic();
-            //analysisMSC();
+            analysisMSC();
             //analysisMajor();
             //analysisStandard();
         }
@@ -342,8 +342,8 @@ namespace DES3560
             lblMyRGC.Text = myRGC.RGCGrade.ToString();
             if (studentInfo.curriculumYear <= 2014)
             {
-                lblRGCStandard.Text = "/ 14";
-                if (myRGC.RGCGrade >= 14)
+                lblRGCStandard.Text = "/ 12";
+                if (myRGC.RGCGrade >= 12)
                 {
                     lblRGCPass.ForeColor = Color.Blue;
                     lblRGCPass.Text = "P";
@@ -386,22 +386,42 @@ namespace DES3560
                 lblBasicPass.Text = "F";
             }
         }
-        //private void analysisMSC()
-        //{
-        //    myMSC = new CommonMSC(studentInfo.curriculumYear);
-        //    myMSC.checkMSC(studentInfo.priList);
-        //    if (studentInfo.curriculumYear < 2017)
-        //    {
-        //        lblMyMath.Text = myMSC.mathGrade.ToString();
-        //        lblMyScience.Text = myMSC.scienceGrade.ToString();
-        //    }
-        //    else
-        //    {
-        //        lblMyMath.Text = myMSC.mathGrade.ToString() + " / 12";
-        //        lblMyScience.Text = myMSC.scienceGrade.ToString() + " / 6";
-        //    }
-        //    txtMSC.Text = String.Join(Environment.NewLine, myMSC.unacquiredList);
-        //}
+        private void analysisMSC()
+        {
+            myMSC = new CommonMSC(studentInfo.curriculumYear);
+            myMSC.checkMSC(studentInfo.priList);
+            if (studentInfo.curriculumYear < 2017)
+            {
+                lblMSCMyMath.Text = myMSC.mathGrade.ToString() + " / 9";
+                lblMSCMyScience.Text = myMSC.scienceGrade.ToString() + " / 6";
+                if (myMSC.mathGrade + myMSC.scienceGrade >= 28)
+                {
+                    lblMSCPass.ForeColor = Color.Blue;
+                    lblMSCPass.Text = "P";
+                }
+                else
+                {
+                    lblMSCPass.ForeColor = Color.Red;
+                    lblMSCPass.Text = "F";
+                }
+            }
+            else
+            {
+                lblMSCMyMath.Text = myMSC.mathGrade.ToString() + " / 12";
+                lblMSCMyScience.Text = myMSC.scienceGrade.ToString() + " / 6";
+                if (myMSC.mathGrade + myMSC.scienceGrade >= 21)
+                {
+                    lblMSCPass.ForeColor = Color.Blue;
+                    lblMSCPass.Text = "P";
+                }
+                else
+                {
+                    lblMSCPass.ForeColor = Color.Red;
+                    lblMSCPass.Text = "F";
+                }
+            }
+            txtMSC.Text = String.Join(Environment.NewLine, myMSC.unacquiredList);
+        }
         //private void analysisMajor()
         //{
         //    paperPass = false;

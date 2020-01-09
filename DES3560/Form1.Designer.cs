@@ -98,15 +98,13 @@
             this.lblMSCMath = new System.Windows.Forms.Label();
             this.lblMSCScience = new System.Windows.Forms.Label();
             this.lblMSCPass = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtMSC = new System.Windows.Forms.TextBox();
             this.lblMSCMyMath = new System.Windows.Forms.Label();
-            this.lblMSCMathStandard = new System.Windows.Forms.Label();
             this.lblMSCMyScience = new System.Windows.Forms.Label();
-            this.lblMSCScineceStandard = new System.Windows.Forms.Label();
             this.tableMajor = new System.Windows.Forms.TableLayoutPanel();
             this.lblMajor = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtMajor = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lblMajorDesign = new System.Windows.Forms.Label();
             this.lblMajorAdvanced = new System.Windows.Forms.Label();
@@ -986,11 +984,9 @@
             this.tableMSC.Controls.Add(this.lblMSCMath, 1, 0);
             this.tableMSC.Controls.Add(this.lblMSCScience, 4, 0);
             this.tableMSC.Controls.Add(this.lblMSCPass, 7, 0);
-            this.tableMSC.Controls.Add(this.textBox1, 8, 0);
+            this.tableMSC.Controls.Add(this.txtMSC, 8, 0);
             this.tableMSC.Controls.Add(this.lblMSCMyMath, 1, 1);
-            this.tableMSC.Controls.Add(this.lblMSCMathStandard, 2, 1);
             this.tableMSC.Controls.Add(this.lblMSCMyScience, 4, 1);
-            this.tableMSC.Controls.Add(this.lblMSCScineceStandard, 5, 1);
             this.tableMSC.Location = new System.Drawing.Point(40, 566);
             this.tableMSC.Name = "tableMSC";
             this.tableMSC.RowCount = 2;
@@ -1051,66 +1047,42 @@
             this.lblMSCPass.Text = "P";
             this.lblMSCPass.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox1
+            // txtMSC
             // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Location = new System.Drawing.Point(453, 3);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.tableMSC.SetRowSpan(this.textBox1, 2);
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(434, 134);
-            this.textBox1.TabIndex = 4;
+            this.txtMSC.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtMSC.Location = new System.Drawing.Point(453, 3);
+            this.txtMSC.Multiline = true;
+            this.txtMSC.Name = "txtMSC";
+            this.tableMSC.SetRowSpan(this.txtMSC, 2);
+            this.txtMSC.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtMSC.Size = new System.Drawing.Size(434, 134);
+            this.txtMSC.TabIndex = 4;
             // 
             // lblMSCMyMath
             // 
             this.lblMSCMyMath.AutoSize = true;
+            this.tableMSC.SetColumnSpan(this.lblMSCMyMath, 3);
             this.lblMSCMyMath.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblMSCMyMath.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblMSCMyMath.Location = new System.Drawing.Point(103, 70);
             this.lblMSCMyMath.Name = "lblMSCMyMath";
-            this.lblMSCMyMath.Size = new System.Drawing.Size(44, 70);
+            this.lblMSCMyMath.Size = new System.Drawing.Size(144, 70);
             this.lblMSCMyMath.TabIndex = 5;
             this.lblMSCMyMath.Text = "12";
             this.lblMSCMyMath.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblMSCMathStandard
-            // 
-            this.lblMSCMathStandard.AutoSize = true;
-            this.tableMSC.SetColumnSpan(this.lblMSCMathStandard, 2);
-            this.lblMSCMathStandard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblMSCMathStandard.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblMSCMathStandard.Location = new System.Drawing.Point(153, 70);
-            this.lblMSCMathStandard.Name = "lblMSCMathStandard";
-            this.lblMSCMathStandard.Size = new System.Drawing.Size(94, 70);
-            this.lblMSCMathStandard.TabIndex = 6;
-            this.lblMSCMathStandard.Text = "/ 12";
-            this.lblMSCMathStandard.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // lblMSCMyScience
             // 
             this.lblMSCMyScience.AutoSize = true;
+            this.tableMSC.SetColumnSpan(this.lblMSCMyScience, 3);
             this.lblMSCMyScience.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblMSCMyScience.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblMSCMyScience.Location = new System.Drawing.Point(253, 70);
             this.lblMSCMyScience.Name = "lblMSCMyScience";
-            this.lblMSCMyScience.Size = new System.Drawing.Size(44, 70);
+            this.lblMSCMyScience.Size = new System.Drawing.Size(144, 70);
             this.lblMSCMyScience.TabIndex = 7;
             this.lblMSCMyScience.Text = "6";
             this.lblMSCMyScience.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblMSCScineceStandard
-            // 
-            this.lblMSCScineceStandard.AutoSize = true;
-            this.tableMSC.SetColumnSpan(this.lblMSCScineceStandard, 2);
-            this.lblMSCScineceStandard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblMSCScineceStandard.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblMSCScineceStandard.Location = new System.Drawing.Point(303, 70);
-            this.lblMSCScineceStandard.Name = "lblMSCScineceStandard";
-            this.lblMSCScineceStandard.Size = new System.Drawing.Size(94, 70);
-            this.lblMSCScineceStandard.TabIndex = 8;
-            this.lblMSCScineceStandard.Text = "/ 6";
-            this.lblMSCScineceStandard.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tableMajor
             // 
@@ -1126,7 +1098,7 @@
             this.tableMajor.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableMajor.Controls.Add(this.lblMajor, 0, 0);
             this.tableMajor.Controls.Add(this.label4, 7, 0);
-            this.tableMajor.Controls.Add(this.textBox2, 8, 0);
+            this.tableMajor.Controls.Add(this.txtMajor, 8, 0);
             this.tableMajor.Controls.Add(this.label1, 1, 0);
             this.tableMajor.Controls.Add(this.lblMajorDesign, 3, 0);
             this.tableMajor.Controls.Add(this.lblMajorAdvanced, 5, 0);
@@ -1170,16 +1142,16 @@
             this.label4.Text = "P";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox2
+            // txtMajor
             // 
-            this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox2.Location = new System.Drawing.Point(453, 3);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.tableMajor.SetRowSpan(this.textBox2, 2);
-            this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox2.Size = new System.Drawing.Size(434, 134);
-            this.textBox2.TabIndex = 4;
+            this.txtMajor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtMajor.Location = new System.Drawing.Point(453, 3);
+            this.txtMajor.Multiline = true;
+            this.txtMajor.Name = "txtMajor";
+            this.tableMajor.SetRowSpan(this.txtMajor, 2);
+            this.txtMajor.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtMajor.Size = new System.Drawing.Size(434, 134);
+            this.txtMajor.TabIndex = 4;
             // 
             // label1
             // 
@@ -1409,15 +1381,13 @@
         private System.Windows.Forms.Label lblMSCMath;
         private System.Windows.Forms.Label lblMSCScience;
         private System.Windows.Forms.Label lblMSCPass;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtMSC;
         private System.Windows.Forms.Label lblMSCMyMath;
-        private System.Windows.Forms.Label lblMSCMathStandard;
         private System.Windows.Forms.Label lblMSCMyScience;
-        private System.Windows.Forms.Label lblMSCScineceStandard;
         private System.Windows.Forms.TableLayoutPanel tableMajor;
         private System.Windows.Forms.Label lblMajor;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtMajor;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblMajorDesign;
         private System.Windows.Forms.Label lblMajorAdvanced;

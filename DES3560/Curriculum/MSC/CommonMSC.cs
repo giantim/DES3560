@@ -7,6 +7,7 @@ namespace DES3560.Curriculum.MSC
         public int curriculumYear;
         public List<Subject> subjectMathReq;
         public List<Subject> subjectMath;
+        public List<Subject> subjectScienceReq;
         public List<Subject> subjectScience;
         public List<string> unacquiredList;
         public int scienceGrade;
@@ -20,11 +21,13 @@ namespace DES3560.Curriculum.MSC
 
             subjectMathReq = new List<Subject>();
             subjectMath = new List<Subject>();
+            subjectScienceReq = new List<Subject>();
             subjectScience = new List<Subject>();
             unacquiredList = new List<string>();
 
             addSubjectMathReq();
             addSubjectMath();
+            addSubjectScienceReq();
             addSubjectScience();
         }
         private void addSubjectMathReq()
@@ -43,6 +46,7 @@ namespace DES3560.Curriculum.MSC
             });
             switch (curriculumYear)
             {
+                case 2013:
                 case 2014:
                 case 2015:
                 case 2016:
@@ -91,6 +95,7 @@ namespace DES3560.Curriculum.MSC
             });
             switch (curriculumYear)
             {
+                case 2013:
                 case 2014:
                 case 2015:
                 case 2016:
@@ -111,44 +116,47 @@ namespace DES3560.Curriculum.MSC
                     break;
             }
         }
-        private void addSubjectScience()
+        private void addSubjectScienceReq()
         {
-            subjectScience.Add(new Subject
+            subjectScienceReq.Add(new Subject
             {
                 subjectID = "PRI4002",
                 subjectName = "일반물리학및실험1",
                 subjectGrade = 4,
             });
-            subjectScience.Add(new Subject
+            subjectScienceReq.Add(new Subject
             {
                 subjectID = "PRI4013",
                 subjectName = "일반물리학및실험2",
                 subjectGrade = 4,
             });
-            subjectScience.Add(new Subject
+            subjectScienceReq.Add(new Subject
             {
                 subjectID = "PRI4003",
                 subjectName = "일반화학및실험1",
                 subjectGrade = 4,
             });
-            subjectScience.Add(new Subject
+            subjectScienceReq.Add(new Subject
             {
                 subjectID = "PRI4014",
                 subjectName = "일반화학및실험2",
                 subjectGrade = 4,
             });
-            subjectScience.Add(new Subject
+            subjectScienceReq.Add(new Subject
             {
                 subjectID = "PRI4004",
                 subjectName = "일반생물학및실험1",
                 subjectGrade = 3,
             });
-            subjectScience.Add(new Subject
+            subjectScienceReq.Add(new Subject
             {
                 subjectID = "PRI4015",
                 subjectName = "일반생물학및실험2",
                 subjectGrade = 3,
             });
+        }
+        private void addSubjectScience()
+        {
             subjectScience.Add(new Subject
             {
                 subjectID = "PRI4028",
@@ -176,8 +184,9 @@ namespace DES3560.Curriculum.MSC
         }
         public void checkMSC(List<Subject> list)
         {
-            checkReqMath(list);
+            checkMathReq(list);
             checkMath(list);
+            checkScienceReq(list);
             checkScience(list);
             sumGrade();
         }
@@ -185,6 +194,7 @@ namespace DES3560.Curriculum.MSC
         {
             switch (curriculumYear)
             {
+                case 2013:
                 case 2014:
                 case 2015:
                 case 2016:
@@ -193,44 +203,57 @@ namespace DES3560.Curriculum.MSC
                     break;
                 default:
                     if (mathGrade + scienceGrade < 21)
-                        unacquiredList.Add("MSC를 최소 28학점 이상 수강하십시오.");
+                        unacquiredList.Add("MSC를 최소 21학점 이상 수강하십시오.");
                     break;
             }
         }
-        private void checkReqMath(List<Subject> list)
+        private void checkMathReq(List<Subject> list)
         {
             foreach (Subject s1 in subjectMathReq)
             {
-                int index = 0;
+                bool isSame = false;
                 foreach (Subject s2 in list)
                 {
                     if (s1.compare(s2))
-                        break;
-                    index = index + 1;
-                }
-                if (index.Equals(list.Count))
-                    unacquiredList.Add(s1.subjectName);
-            }
-            mathGrade = mathGrade + (9 - (unacquiredList.Count * 3));
-        }
-        private void checkMath(List<Subject> list)
-        {
-            int index = 0;
-            while (index < subjectMath.Count)
-            {
-                int i = 0;
-                for (; i < list.Count; i++)
-                {
-                    if (list[i].compare(subjectMath[index]))
                     {
-                        subjectMath.RemoveAt(index);
+                        isSame = true;
+                        mathGrade = mathGrade + s1.subjectGrade;
                         break;
                     }
                 }
-                if (i.Equals(list.Count))
-                    index = index + 1;
+                if (!isSame)
+                    unacquiredList.Add(s1.subjectName);
             }
-            mathGrade = mathGrade + (15 - (subjectMath.Count * 3));
+        }
+        private void checkMath(List<Subject> list)
+        {
+            foreach (Subject s1 in subjectMath)
+            {
+                foreach (Subject s2 in list)
+                {
+                    if (s1.compare(s2))
+                    {
+                        mathGrade = mathGrade + s1.subjectGrade;
+                        break;
+                    }
+                }
+            }
+        }
+        private void checkScienceReq(List<Subject> list)
+        {
+            foreach (Subject s1 in subjectScienceReq)
+            {
+                foreach (Subject s2 in list)
+                {
+                    if (s1.compare(s2))
+                    {
+                        scienceGrade = scienceGrade + s1.subjectGrade;
+                        break;
+                    }
+                }
+            }
+            if (scienceGrade < 3)
+                unacquiredList.Add("실험교과목을 최소 1과목 이상 수강하십시오.");
         }
         private void checkScience(List<Subject> list)
         {
