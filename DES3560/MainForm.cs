@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
@@ -35,28 +31,29 @@ namespace DES3560
         public MainForm()
         {
             InitializeComponent();
+            turnOffTable();
         }
         private void turnOffTable()
         {
             tableStudentInfo.Visible = false;
-            tableStandard.Visible = false;
             tableStudentInfoException.Visible = false;
             tableHeader.Visible = false;
             tableRGC.Visible = false;
             tableBasic.Visible = false;
             tableMSC.Visible = false;
             tableMajor.Visible = false;
+            tableStandard.Visible = false;
         }
         private void turnOnTable()
         {
             tableStudentInfo.Visible = true;
-            tableStandard.Visible = true;
             tableStudentInfoException.Visible = true;
             tableHeader.Visible = true;
             tableRGC.Visible = true;
             tableBasic.Visible = true;
             tableMSC.Visible = true;
             tableMajor.Visible = true;
+            tableStandard.Visible = true;
         }
         private bool extractTextFromPdf()
         {
@@ -106,7 +103,7 @@ namespace DES3560
         {
             studentInfo = new Student
             {
-                curriculumYear = Int32.Parse(pdfText.Substring(pdfText.IndexOf("교육과정 적용년도: ") + 11, 4)),
+                curriculumYear = Convert.ToInt32(pdfText.Substring(pdfText.IndexOf("교육과정 적용년도: ") + 11, 4)),
                 studentClass = pdfText.Substring(pdfText.IndexOf(" 학번: ") - 3, 3),
                 studentId = pdfText.Substring(pdfText.IndexOf("학번: ") + 4, 10),
                 name = extractName(),
@@ -178,7 +175,7 @@ namespace DES3560
                 string subjectID = rgcText.Substring(0, 7);
                 string subjectName = rgcText.Substring(rgcText.IndexOf(subjectID) + subjectID.Length + 1,
                                     getSpaceIndex(rgcText.Substring(rgcText.IndexOf(subjectID) + subjectID.Length + 1), 0));
-                int subjectGrade = Int32.Parse(rgcText.Substring(rgcText.IndexOf(subjectName) + subjectName.Length
+                int subjectGrade = Convert.ToInt32(rgcText.Substring(rgcText.IndexOf(subjectName) + subjectName.Length
                                     + jumpNonSpace(rgcText.Substring(rgcText.IndexOf(subjectName) + subjectName.Length), 0), 1));
                 rgcList.Add(new Subject
                 {
@@ -201,7 +198,7 @@ namespace DES3560
                 string subjectID = priText.Substring(0, 7);
                 string subjectName = priText.Substring(priText.IndexOf(subjectID) + subjectID.Length + 1,
                                     getSpaceIndex(priText.Substring(priText.IndexOf(subjectID) + subjectID.Length + 1), 0));
-                int subjectGrade = Int32.Parse(priText.Substring(priText.IndexOf(subjectName) + subjectName.Length
+                int subjectGrade = Convert.ToInt32(priText.Substring(priText.IndexOf(subjectName) + subjectName.Length
                                     + jumpNonSpace(priText.Substring(priText.IndexOf(subjectName) + subjectName.Length), 0), 1));
                 priList.Add(new Subject
                 {
@@ -235,7 +232,7 @@ namespace DES3560
                 string subjectID = cseText.Substring(0, 7);
                 string subjectName = cseText.Substring(cseText.IndexOf(subjectID) + subjectID.Length + 1,
                                     getSpaceIndex(cseText.Substring(cseText.IndexOf(subjectID) + subjectID.Length + 1), 0));
-                int subjectGrade = Int32.Parse(cseText.Substring(cseText.IndexOf(subjectName) + subjectName.Length
+                int subjectGrade = Convert.ToInt32(cseText.Substring(cseText.IndexOf(subjectName) + subjectName.Length
                                     + jumpNonSpace(cseText.Substring(cseText.IndexOf(subjectName) + subjectName.Length), 0), 1));
                 string categoryText = cseText.Substring(cseText.IndexOf(subjectName) + subjectName.Length
                                     + jumpNonSpace(cseText.Substring(cseText.IndexOf(subjectName) + subjectName.Length), 0) + 1);
@@ -318,7 +315,7 @@ namespace DES3560
             analysisBasic();
             analysisMSC();
             //analysisMajor();
-            //analysisStandard();
+            analysisStandard();
         }
         private void analysisStudentInfo()
         {
@@ -345,11 +342,13 @@ namespace DES3560
                 {
                     lblRGCPass.ForeColor = Color.Blue;
                     lblRGCPass.Text = "P";
+                    studentInfo.rgcPass = true;
                 }
                 else
                 {
                     lblRGCPass.ForeColor = Color.Red;
                     lblRGCPass.Text = "F";
+                    studentInfo.rgcPass = false;
                 }
             }
             else
@@ -359,11 +358,13 @@ namespace DES3560
                 {
                     lblRGCPass.ForeColor = Color.Blue;
                     lblRGCPass.Text = "P";
+                    studentInfo.rgcPass = true;
                 }
                 else
                 {
                     lblRGCPass.ForeColor = Color.Red;
                     lblRGCPass.Text = "F";
+                    studentInfo.rgcPass = false;
                 }
             }
         }
@@ -377,11 +378,13 @@ namespace DES3560
             {
                 lblBasicPass.ForeColor = Color.Blue;
                 lblBasicPass.Text = "P";
+                studentInfo.basicPass = true;
             }
             else
             {
                 lblBasicPass.ForeColor = Color.Red;
                 lblBasicPass.Text = "F";
+                studentInfo.basicPass = false;
             }
         }
         private void analysisMSC()
@@ -396,11 +399,13 @@ namespace DES3560
                 {
                     lblMSCPass.ForeColor = Color.Blue;
                     lblMSCPass.Text = "P";
+                    studentInfo.mscPass = true;
                 }
                 else
                 {
                     lblMSCPass.ForeColor = Color.Red;
                     lblMSCPass.Text = "F";
+                    studentInfo.mscPass = false;
                 }
             }
             else
@@ -411,11 +416,13 @@ namespace DES3560
                 {
                     lblMSCPass.ForeColor = Color.Blue;
                     lblMSCPass.Text = "P";
+                    studentInfo.mscPass = true;
                 }
                 else
                 {
                     lblMSCPass.ForeColor = Color.Red;
                     lblMSCPass.Text = "F";
+                    studentInfo.mscPass = false;
                 }
             }
             txtMSC.Text = String.Join(Environment.NewLine, myMSC.unacquiredList);
@@ -439,95 +446,273 @@ namespace DES3560
         //    txtMSC.Text = String.Join(Environment.NewLine, myMajor.unacquiredList);
         //    analysisPaper(myMajor.unacquiredList);
         //}
-        private void analysisPaper(List<string> list)
-        {
-            paperPass = false;
-            int count = 0;
-            foreach (string s in list)
-            {
-                if (s.Equals("컴퓨터공학종합설계1") || s.Equals("컴퓨터공학종합설계2"))
-                    count = count + 1;
-            }
-            if (count.Equals(0))
-                paperPass = true;
-        }
         private void analysisStandard()
         {
-            //allGrade = extractAllGrade();
-            //gpa = float.Parse(pdfText.Substring(pdfText.IndexOf("평점평균:") + 5, 4));
-            //majorEng = countMajorEng();
-            //subEngSum = countAllEng();
-            //string toeic = pdfText.Substring(pdfText.IndexOf("영어패스제(토익 등): ") + 18, 4);
-            //lblMyMajorEng.Text = majorEng.ToString() + " / 2";
-            //lblMyTotalEng.Text = subEngSum.ToString() + " / 4";
-            //lblMyToeic.Text = toeic.Equals("FAIL") ? "x" : "o";
-            //lblMyPaper.Text = paperPass ? "o" : "x";
-            //lblMyAllGrade.Text = allGrade.ToString() + " / 140";
-            //lblMyGPA.Text = gpa.ToString();
-            //lblMyEngineering.Text = checkEngineering();
-            //lblMyGraduate.Text = checkGraduate();
+            setAllGradeText();
+            setGPAText();
+            setTeachingText();
+            setEngResultText();
+            setEngText();
+            setToeicText();
+            setPaperText();
+            setEngineeringText();
+            setGraduationText();
         }
-        private int extractAllGrade()
+        private int getSpaceOrNewLineIndex(string s)
         {
-            string gpaString = pdfText.Substring(pdfText.IndexOf("총취득학점:") + 6);
             int index = 0;
-            foreach (char c in gpaString)
+            foreach (char c in s)
             {
                 if (!c.Equals(' ') && c != 10)
                     index = index + 1;
                 else
                     break;
             }
-            return Int32.Parse(gpaString.Substring(0, index));
+            return index;
         }
-        private int countMajorEng()
+        private void extractAllGrade()
         {
-            int count = 0;
-            foreach (Subject s in studentInfo.cseList)
-            {
-                if (s.subjectName.Contains("<영어>"))
-                    count = count + 1;
-            }
-            return count;
+            string gradeString = pdfText.Substring(pdfText.IndexOf("총취득학점:") + 6);
+            studentInfo.allGrade = gradeString.Substring(0, getSpaceOrNewLineIndex(gradeString));
         }
-        private int countAllEng()
+        private void setAllGradeText()
         {
-            int count = countMajorEng();
-            foreach (Subject s in studentInfo.rgcList)
+            extractAllGrade();
+            lblMyAllGrade.Text = studentInfo.allGrade;
+            if (Convert.ToInt32(studentInfo.allGrade) >= 140)
             {
-                if (s.subjectName.Contains("<영어>"))
-                    count = count + 1;
-            }
-            return count;
-        }
-        private string checkEngineering()
-        {
-            if (studentInfo.submajor.Equals(false))
-            {
-                if (myBasic.basicGrade >= 9 && myRGC.RGCGrade >= 16
-                && myMSC.unacquiredList.Count == 0 && myMajor.unacquiredList.Count == 0
-                && myMajor.allGrade >= 84 && myMajor.designGrade >= 12 && myMajor.specialGrade >= 42
-                && allGrade >= 140 && gpa >= 2.0 && majorEng >= 2 && subEngSum >= 4
-                && paperPass == true)
-                    return "o";
-                return "x";
+                lblAllGradePass.ForeColor = Color.Blue;
+                lblAllGradePass.Text = "P";
+                studentInfo.allGradePass = true;
             }
             else
             {
-                if (myBasic.basicGrade >= 9 && myRGC.RGCGrade >= 16
-                && myMSC.unacquiredList.Count == 0 && myMajor.unacquiredList.Count == 0
-                && myMajor.allGrade >= 51 && myMajor.designGrade >= 12 && myMajor.specialGrade >= 26
-                && allGrade >= 140 && gpa >= 2.0 && majorEng >= 2 && subEngSum >= 4
-                && paperPass == true)
-                    return "o";
-                return "x";
+                lblAllGradePass.ForeColor = Color.Red;
+                lblAllGradePass.Text = "F";
+                studentInfo.allGradePass = false;
             }
         }
-        private string checkGraduate()
+        private void extractGPA()
         {
-            if (lblMyAllGrade.Text == "o" && lblMyToeic.Text == "o")
-                return "o";
-            return "x";
+            string gpaString = pdfText.Substring(pdfText.IndexOf("평점평균:") + 5);
+            studentInfo.gpa = gpaString.Substring(0, getSpaceOrNewLineIndex(gpaString));
+        }
+        private void setGPAText()
+        {
+            extractGPA();
+            lblMyGPA.Text = studentInfo.gpa;
+            if (Convert.ToSingle(studentInfo.gpa) >= 2.0)
+            {
+                lblGPAPass.ForeColor = Color.Blue;
+                lblGPAPass.Text = "P";
+                studentInfo.gpaPass = true;
+            }
+            else
+            {
+                lblGPAPass.ForeColor = Color.Red;
+                lblGPAPass.Text = "F";
+                studentInfo.gpaPass = false;
+            }
+        }
+        private void setTeachingText()
+        {
+            extractTeaching();
+            lblMyTeaching.Text = studentInfo.teaching;
+        }
+        private void extractTeaching()
+        {
+            string teachingString = pdfText.Substring(pdfText.IndexOf("교직인적성 : ") + 8);
+            studentInfo.teaching = teachingString.Substring(0, getSpaceOrNewLineIndex(teachingString));
+        }
+        private void setEngResultText()
+        {
+            countMajorEng();
+            countOtherEng();
+            lblMyMajorEng.Text = studentInfo.majorEng;
+            lblMyOtherEng.Text = studentInfo.otherEng;
+            if (Convert.ToInt32(studentInfo.majorEng) >= 2 &&
+                Convert.ToInt32(studentInfo.majorEng) + Convert.ToInt32(studentInfo.otherEng) >= 4)
+            {
+                lblEngResultPass.ForeColor = Color.Blue;
+                lblEngResultPass.Text = "P";
+                studentInfo.engResultPass = true;
+            }
+            else
+            {
+                lblEngResultPass.ForeColor = Color.Red;
+                lblEngResultPass.Text = "F";
+                studentInfo.engResultPass = false;
+            }
+        }
+        private void countMajorEng()
+        {
+            string majorEngString = pdfText.Substring(pdfText.IndexOf("(전공:") + 4);
+            studentInfo.majorEng = majorEngString.Substring(0, getCommaIndex(majorEngString));
+        }
+        private int getCommaIndex(string s)
+        {
+            int index = 0;
+            foreach (char c in s)
+            {
+                if (!c.Equals(','))
+                    index = index + 1;
+                else
+                    break;
+            }
+            return index;
+        }
+        private void countOtherEng()
+        {
+            string otherEngString = pdfText.Substring(pdfText.IndexOf(" 전공외:") + 5);
+            studentInfo.otherEng = otherEngString.Substring(0, getParenthesisIndex(otherEngString));
+        }
+        private int getParenthesisIndex(string s)
+        {
+            int index = 0;
+            foreach (char c in s)
+            {
+                if (!c.Equals(')'))
+                    index = index + 1;
+                else
+                    break;
+            }
+            return index;
+        }
+        private void setEngText()
+        {
+            extractEng();
+            lblMyEng.Text = studentInfo.isEng;
+            if (studentInfo.isEng.Equals("비대상"))
+            {
+                lblEngPass.Text = String.Empty;
+                studentInfo.engPass = true;
+            }
+            else if (studentInfo.isEng.Equals("대상") && studentInfo.eng.Equals("PASS"))
+            {
+                lblEngPass.ForeColor = Color.Blue;
+                lblEngPass.Text = "P";
+                studentInfo.engPass = true;
+            }
+            else if (studentInfo.isEng.Equals("대상") && studentInfo.eng.Equals("FAIL"))
+            {
+                lblEngPass.ForeColor = Color.Red;
+                lblEngPass.Text = "F";
+                studentInfo.engPass = false;
+            }
+        }
+        private void extractEng()
+        {
+            string engString = pdfText.Substring(pdfText.IndexOf("영어강의이수: ") + 8);
+            studentInfo.isEng = engString.Substring(0, getSpaceOrNewLineIndex(engString));
+            engString = engString.Substring(getSpaceOrNewLineIndex(engString) + 3);
+            studentInfo.eng = engString.Substring(0, 4);
+        }
+        private void setToeicText()
+        {
+            extractToeic();
+            lblMyToeic.Text = studentInfo.isToeic;
+            if (studentInfo.isToeic.Equals("비대상"))
+            {
+                lblToeicPass.Text = String.Empty;
+                studentInfo.toeicPass = true;
+            }
+            else if (studentInfo.isToeic.Equals("대상") && studentInfo.toeic.Equals("PASS"))
+            {
+                lblToeicPass.ForeColor = Color.Blue;
+                lblToeicPass.Text = "P";
+                studentInfo.toeicPass = true;
+            }
+            else if (studentInfo.isToeic.Equals("대상") && studentInfo.toeic.Equals("FAIL"))
+            {
+                lblToeicPass.ForeColor = Color.Red;
+                lblToeicPass.Text = "F";
+                studentInfo.toeicPass = false;
+            }
+        }
+        private void extractToeic()
+        {
+            string toeicString = pdfText.Substring(pdfText.IndexOf("영어패스제(토익 등): ") + 13);
+            studentInfo.isToeic = toeicString.Substring(0, getSpaceOrNewLineIndex(toeicString));
+            toeicString = toeicString.Substring(getSpaceOrNewLineIndex(toeicString) + 3);
+            studentInfo.toeic = toeicString.Substring(0, 4);
+        }
+        private void setPaperText()
+        {
+            extractPaper();
+            if (studentInfo.paper)
+            {
+                lblPaperPass.ForeColor = Color.Blue;
+                lblPaperPass.Text = "P";
+            }
+            else
+            {
+                lblPaperPass.ForeColor = Color.Red;
+                lblPaperPass.Text = "F";
+            }
+        }
+        private void extractPaper()
+        {
+            if (pdfText.Contains("졸업논문 심사"))
+            {
+                string paperString = pdfText.Substring(pdfText.IndexOf("졸업논문 심사") + 7);
+                paperString = paperString.Substring(getSpaceIndex(paperString, 0) + 1);
+                string paperPass = paperString.Substring(0, getSpaceOrNewLineIndex(paperString));
+                studentInfo.paper = paperPass.Equals("합격") ? true : false;
+            }
+            else
+            {
+                studentInfo.paper = false;
+            }
+        }
+        private bool checkCourse()
+        {
+            if (studentInfo.rgcPass && studentInfo.basicPass
+                && studentInfo.mscPass && studentInfo.majorPass)
+                return true;
+            return false;
+        }
+        private bool checkStandardReq()
+        {
+            if (studentInfo.allGradePass && studentInfo.gpaPass
+                && studentInfo.engResultPass && studentInfo.engPass && studentInfo.paper)
+                return true;
+            return false;
+        }
+        private void setEngineeringText()
+        {
+            if (studentInfo.isEngineering)
+            {
+                if (checkCourse() && checkStandardReq())
+                {
+                    lblEngineeringPass.ForeColor = Color.Blue;
+                    lblEngineeringPass.Text = "P";
+                }
+                else
+                {
+                    lblEngineeringPass.ForeColor = Color.Red;
+                    lblEngineeringPass.Text = "F";
+                }
+            }
+            else
+            {
+                lblEngineeringPass.Text = "비대상";
+            }
+            studentInfo.engineeringPass = checkCourse() && checkStandardReq() ? true : false;
+        }
+        private void setGraduationText()
+        {
+            if (studentInfo.engineeringPass && studentInfo.toeicPass)
+            {
+                lblGraduationPass.ForeColor = Color.Blue;
+                lblGraduationPass.Text = "P";
+                studentInfo.graduationPass = true;
+            }
+            else
+            {
+                lblGraduationPass.ForeColor = Color.Red;
+                lblGraduationPass.Text = "F";
+                studentInfo.graduationPass = false;
+            }
         }
 #endregion
 

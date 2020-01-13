@@ -25,5 +25,28 @@ namespace DES3560
         public List<Subject> priList;
         public List<Subject> cseList;
         public List<Subject> desList;
+
+        public string allGrade;
+        public string gpa;
+        public string teaching;
+        public string majorEng;
+        public string otherEng;
+        public string isEng;
+        public string eng;
+        public string isToeic;
+        public string toeic;
+
+        public bool rgcPass;
+        public bool basicPass;
+        public bool mscPass;
+        public bool majorPass;
+        public bool allGradePass;
+        public bool gpaPass;
+        public bool engResultPass;
+        public bool engPass;
+        public bool toeicPass;
+        public bool paper;
+        public bool engineeringPass;
+        public bool graduationPass;
     }
 }
