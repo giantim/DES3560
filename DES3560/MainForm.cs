@@ -21,11 +21,6 @@ namespace DES3560
         public CommonBasic myBasic;
         public CommonMSC myMSC;
         public MajorByCurri myMajor;
-        public bool paperPass;
-        public int allGrade;
-        public float gpa;
-        public int majorEng;
-        public int subEngSum;
 
         #region Functions
         public MainForm()
@@ -49,11 +44,11 @@ namespace DES3560
             tableStudentInfo.Visible = true;
             tableStudentInfoException.Visible = true;
             tableHeader.Visible = true;
-            tableRGC.Visible = true;
-            tableBasic.Visible = true;
-            tableMSC.Visible = true;
+            //tableRGC.Visible = true;
+            //tableBasic.Visible = true;
+            //tableMSC.Visible = true;
             tableMajor.Visible = true;
-            tableStandard.Visible = true;
+            //tableStandard.Visible = true;
         }
         private bool extractTextFromPdf()
         {
@@ -248,7 +243,7 @@ namespace DES3560
                 });
                 temp = temp.Substring(temp.IndexOf(subjectID) + 8);
             }
-            if (temp.Contains("CIC4003"))
+            if (pdfText.Contains("CIC4003"))
             {
                 cseList.Add(new Subject
                 {
@@ -256,6 +251,16 @@ namespace DES3560
                     subjectName = "인턴쉽",
                     subjectGrade = 3,
                     subjectCategory = "전문",
+                });
+            }
+            if (pdfText.Contains("CIC2001"))
+            {
+                cseList.Add(new Subject
+                {
+                    subjectID = "CIC2001",
+                    subjectName = "창의적공학설계",
+                    subjectGrade = 3,
+                    subjectCategory = "기초",
                 });
             }
             return cseList;
@@ -270,7 +275,8 @@ namespace DES3560
                 string subjectID = desText.Substring(0, 7);
                 string subjectName = desText.Substring(desText.IndexOf(subjectID) + subjectID.Length + 1,
                                     getSpaceIndex(desText.Substring(desText.IndexOf(subjectID) + subjectID.Length + 1), 0));
-                int subjectGrade = 1;
+                int subjectGrade = subjectName.Contains("개별연구") ? 1 : 3;
+                //string subjectCategory = desText.
                 desList.Add(new Subject
                 {
                     subjectID = subjectID,
@@ -314,7 +320,7 @@ namespace DES3560
             analysisRGC();
             analysisBasic();
             analysisMSC();
-            //analysisMajor();
+            analysisMajor();
             analysisStandard();
         }
         private void analysisStudentInfo()
@@ -427,25 +433,72 @@ namespace DES3560
             }
             txtMSC.Text = String.Join(Environment.NewLine, myMSC.unacquiredList);
         }
-        //private void analysisMajor()
-        //{
-        //    paperPass = false;
-        //    myMajor = new MajorByCurri(studentInfo.curriculumYear);
-        //    myMajor.checkMajor(studentInfo.cseList, studentInfo.desList);
-        //    if (studentInfo.submajor.Equals(false))
-        //    {
-        //        lblMyMajorSum.Text = myMajor.allGrade.ToString() + " / 84";
-        //        lblMySpecial.Text = myMajor.specialGrade.ToString() + " / 52";
-        //    }
-        //    else
-        //    {
-        //        lblMyMajorSum.Text = myMajor.allGrade.ToString() + " / 51";
-        //        lblMySpecial.Text = myMajor.specialGrade.ToString() + " / 26";
-        //    }
-        //    lblMyDesign.Text = myMajor.designGrade.ToString() + " / 12";
-        //    txtMSC.Text = String.Join(Environment.NewLine, myMajor.unacquiredList);
-        //    analysisPaper(myMajor.unacquiredList);
-        //}
+        private void analysisMajor()
+        {
+            myMajor = new MajorByCurri(studentInfo.curriculumYear);
+            myMajor.checkMajor(studentInfo.cseList, studentInfo.desList);
+            lblMyMajorSum.Text = myMajor.allGrade.ToString();
+            lblMyMajorDesign.Text = myMajor.designGrade.ToString();
+            lblMyMajorAdvanced.Text = myMajor.advancedGrade.ToString();
+            txtMajor.Text = String.Join(Environment.NewLine, myMajor.unacquiredList);
+            if (studentInfo.isEngineering)
+            {
+                lblMajorSumStandard.Text = "/84";
+                lblMajorAdvancedStandard.Text = "/42";
+                if (myMajor.allGrade >= 84 && myMajor.advancedGrade >= 42
+                    && myMajor.designGrade >= 12 && myMajor.unacquiredList.Count == 0)
+                {
+                    lblMajorPass.ForeColor = Color.Blue;
+                    lblMajorPass.Text = "P";
+                    studentInfo.majorPass = true;
+                }
+                else
+                {
+                    lblMajorPass.ForeColor = Color.Red;
+                    lblMajorPass.Text = "F";
+                    studentInfo.majorPass = true;
+                }
+            }
+            else
+            {
+                if (studentInfo.submajor.Contains("컴퓨터공학전공") && studentInfo.curriculumYear >= 2019)
+                {
+                    lblMajorSumStandard.Text = "/45";
+                    lblMajorAdvancedStandard.Text = "/23";
+                    if (myMajor.allGrade >= 45 && myMajor.designGrade >= 12
+                        && myMajor.advancedGrade >= 23 && myMajor.unacquiredList.Count == 0)
+                    {
+                        lblMajorPass.ForeColor = Color.Blue;
+                        lblMajorPass.Text = "P";
+                        studentInfo.majorPass = true;
+                    }
+                    else
+                    {
+                        lblMajorPass.ForeColor = Color.Red;
+                        lblMajorPass.Text = "F";
+                        studentInfo.majorPass = true;
+                    }
+                }
+                else
+                {
+                    lblMajorSumStandard.Text = "/51";
+                    lblMajorAdvancedStandard.Text = "/26";
+                    if (myMajor.allGrade >= 51 && myMajor.designGrade >= 12
+                        && myMajor.advancedGrade >= 26 && myMajor.unacquiredList.Count == 0)
+                    {
+                        lblMajorPass.ForeColor = Color.Blue;
+                        lblMajorPass.Text = "P";
+                        studentInfo.majorPass = true;
+                    }
+                    else
+                    {
+                        lblMajorPass.ForeColor = Color.Red;
+                        lblMajorPass.Text = "F";
+                        studentInfo.majorPass = true;
+                    }
+                }
+            }
+        }
         private void analysisStandard()
         {
             setAllGradeText();
