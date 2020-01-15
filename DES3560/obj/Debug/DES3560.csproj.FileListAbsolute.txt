@@ -9,7 +9,6 @@ C:\Users\Administrator\source\repos\DES3560\DES3560\obj\Debug\DES3560.csproj.Gen
 C:\Users\Administrator\source\repos\DES3560\DES3560\obj\Debug\DES3560.csproj.CopyComplete
 C:\Users\Administrator\source\repos\DES3560\DES3560\obj\Debug\DES3560.exe
 C:\Users\Administrator\source\repos\DES3560\DES3560\obj\Debug\DES3560.pdb
-C:\Users\Administrator\source\repos\DES3560\DES3560\obj\Debug\DES3560.Form1.resources
 C:\Users\giant\source\repos\DES3560\DES3560\bin\Debug\DES3560.exe.config
 C:\Users\giant\source\repos\DES3560\DES3560\bin\Debug\DES3560.exe
 C:\Users\giant\source\repos\DES3560\DES3560\bin\Debug\DES3560.pdb

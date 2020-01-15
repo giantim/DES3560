@@ -275,14 +275,29 @@ namespace DES3560
                 string subjectID = desText.Substring(0, 7);
                 string subjectName = desText.Substring(desText.IndexOf(subjectID) + subjectID.Length + 1,
                                     getSpaceIndex(desText.Substring(desText.IndexOf(subjectID) + subjectID.Length + 1), 0));
-                int subjectGrade = subjectName.Contains("개별연구") ? 1 : 3;
-                //string subjectCategory = desText.
+                int subjectGrade;
+                string subjectCategory;
+                if (subjectName.Contains("개별연구"))
+                {
+                    subjectGrade = 1;
+                    subjectCategory = "전문";
+                }
+                else
+                {
+                    subjectGrade = Convert.ToInt32(desText.Substring(desText.IndexOf(subjectName) + subjectName.Length
+                                    + jumpNonSpace(desText.Substring(desText.IndexOf(subjectName) + subjectName.Length), 0), 1)); ;
+                    string categoryText = desText.Substring(desText.IndexOf(subjectName) + subjectName.Length
+                                    + jumpNonSpace(desText.Substring(desText.IndexOf(subjectName) + subjectName.Length), 0) + 1);
+                    subjectCategory = categoryText.Substring(jumpNonSpace(categoryText, 0), 2);
+                    if (!subjectCategory.Equals("기초") && !subjectCategory.Equals("전문"))
+                        subjectCategory = categoryText.Substring(jumpNonSpace(categoryText, 0) + 3, 2);
+                }
                 desList.Add(new Subject
                 {
                     subjectID = subjectID,
                     subjectName = subjectName,
                     subjectGrade = subjectGrade,
-                    subjectCategory = "전문",
+                    subjectCategory = subjectCategory,
                 });
                 temp = temp.Substring(temp.IndexOf(subjectName));
             }
