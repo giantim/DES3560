@@ -347,36 +347,12 @@ namespace DES3560
         private void countMajorEng()
         {
             string majorEngString = studentInfo.pdfText.Substring(studentInfo.pdfText.IndexOf("(전공:") + 4);
-            studentInfo.majorEng = majorEngString.Substring(0, getCommaIndex(majorEngString));
-        }
-        private int getCommaIndex(string s)
-        {
-            int index = 0;
-            foreach (char c in s)
-            {
-                if (!c.Equals(','))
-                    index = index + 1;
-                else
-                    break;
-            }
-            return index;
+            studentInfo.majorEng = majorEngString.Substring(0, CommonFunctions.getCommaIndex(majorEngString));
         }
         private void countOtherEng()
         {
             string otherEngString = studentInfo.pdfText.Substring(studentInfo.pdfText.IndexOf(" 전공외:") + 5);
-            studentInfo.otherEng = otherEngString.Substring(0, getParenthesisIndex(otherEngString));
-        }
-        private int getParenthesisIndex(string s)
-        {
-            int index = 0;
-            foreach (char c in s)
-            {
-                if (!c.Equals(')'))
-                    index = index + 1;
-                else
-                    break;
-            }
-            return index;
+            studentInfo.otherEng = otherEngString.Substring(0, CommonFunctions.getParenthesisIndex(otherEngString));
         }
         private void setEngText()
         {

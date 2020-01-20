@@ -49,5 +49,29 @@ namespace DES3560
             }
             return index;
         }
+        public static int getCommaIndex(string s)
+        {
+            int index = 0;
+            foreach (char c in s)
+            {
+                if (!c.Equals(','))
+                    index = index + 1;
+                else
+                    break;
+            }
+            return index;
+        }
+        public static int getParenthesisIndex(string s)
+        {
+            int index = 0;
+            foreach (char c in s)
+            {
+                if (!c.Equals(')'))
+                    index = index + 1;
+                else
+                    break;
+            }
+            return index;
+        }
     }
 }
