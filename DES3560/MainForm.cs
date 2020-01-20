@@ -483,11 +483,14 @@ namespace DES3560
         private void addDataTable()
         {
             DataTable table = new DataTable();
+            table.Columns.Add("번호", typeof(int));
             table.Columns.Add("이름", typeof(string));
             table.Columns.Add("학번", typeof(string));
+            int index = 1;
             foreach (Student student in studentList)
             {
-                table.Rows.Add(student.name, student.studentId);
+                table.Rows.Add(index, student.name, student.studentId);
+                index = index + 1;
             }
             gridViewStudent.DataSource = table;
         }
