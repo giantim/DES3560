@@ -71,6 +71,11 @@ namespace DES3560
                             student.initStudentInfo();
                             studentList.Add(student);
                         }
+                        else
+                        {
+                            MessageBox.Show("잘못된 파일을 선택했습니다.", "오류", MessageBoxButtons.OK);
+                            return;
+                        }
                     }
                 }
             }
@@ -525,9 +530,12 @@ namespace DES3560
         {
             studentList.Clear();
             extractTextFromPdfTest();
-            addDataTable();
-            studentInfo = studentList[0];
-            runAnalysis();
+            if (studentList.Count > 0)
+            {
+                addDataTable();
+                studentInfo = studentList[0];
+                runAnalysis();
+            }
         }
         private void gridViewStudent_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
